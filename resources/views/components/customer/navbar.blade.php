@@ -1,3 +1,16 @@
+@auth
+    @php
+        $activeConsult = ($featureAstrologers ?? false)
+            ? \App\Models\Consultation::where(function($q) {
+                $q->where('user_id', auth()->id());
+                if (auth()->user()->astrologerProfile) {
+                    $q->orWhere('astrologer_id', auth()->user()->astrologerProfile->id);
+                }
+            })->whereIn('status', ['pending', 'active'])->first()
+            : null;
+    @endphp
+@endauth
+
 <nav class="sticky top-0 z-40 border-b border-cosmic-100/50 bg-white/80 backdrop-blur-lg" x-data="{ mobileOpen: false }">
     <div class="mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {{-- Logo --}}
@@ -17,17 +30,7 @@
             @endif
 
             @auth
-                @if($featureAstrologers ?? false)
-                @php
-                    $activeConsult = \App\Models\Consultation::where(function($q) {
-                        $q->where('user_id', auth()->id());
-                        if (auth()->user()->astrologerProfile) {
-                            $q->orWhere('astrologer_id', auth()->user()->astrologerProfile->id);
-                        }
-                    })->whereIn('status', ['pending', 'active'])->first();
-                @endphp
-
-                @if($activeConsult)
+                @if(($featureAstrologers ?? false) && $activeConsult)
                     <a href="{{ route('consultation.chat', $activeConsult) }}"
                        class="flex items-center gap-1.5 rounded-lg bg-emerald-50 px-3 py-1.5 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-100">
                         <span class="relative flex h-2 w-2">
@@ -36,7 +39,6 @@
                         </span>
                         Live Chat
                     </a>
-                @endif
                 @endif
 
                 <a href="{{ route('horoscope.show') }}"
@@ -108,11 +110,42 @@
     {{-- Mobile menu --}}
     <div x-show="mobileOpen" x-transition class="border-t border-cosmic-100 bg-white px-4 py-4 md:hidden">
         @if($featureAstrologers ?? false)
-            <a href="{{ route('astrologers.index') }}" class="block py-2 text-sm font-medium text-gray-600">Astrologers</a>
+            <a href="{{ route('astrologers.index') }}" class="block py-2 text-sm font-medium {{ request()->routeIs('astrologers.*') ? 'text-cosmic-700' : 'text-gray-600' }}">Astrologers</a>
         @endif
         @auth
-            <a href="{{ route('wallet.index') }}" class="block py-2 text-sm font-medium text-gray-600">Wallet</a>
-            <a href="{{ route('profile.edit') }}" class="block py-2 text-sm font-medium text-gray-600">Profile</a>
+            @if($featureAstrologers ?? false)
+                @if($activeConsult ?? null)
+                    <a href="{{ route('consultation.chat', $activeConsult) }}" class="flex items-center gap-1.5 py-2 text-sm font-semibold text-emerald-700">
+                        <span class="relative flex h-2 w-2">
+                            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                            <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
+                        </span>
+                        Live Chat
+                    </a>
+                @endif
+            @endif
+
+            <div class="my-2 border-t border-gray-100"></div>
+            <p class="px-0 pb-1 text-[10px] font-semibold uppercase tracking-wider text-gray-400">Horoscope</p>
+            <a href="{{ route('horoscope.show') }}" class="block py-2 text-sm font-medium {{ request()->routeIs('horoscope.show') ? 'text-cosmic-700' : 'text-gray-600' }}">My Chart</a>
+            <a href="{{ route('horoscope.transits') }}" class="block py-2 text-sm font-medium {{ request()->routeIs('horoscope.transits') ? 'text-cosmic-700' : 'text-gray-600' }}">Transits</a>
+            <a href="{{ route('horoscope.hora') }}" class="block py-2 text-sm font-medium {{ request()->routeIs('horoscope.hora') ? 'text-cosmic-700' : 'text-gray-600' }}">Hora</a>
+            <a href="{{ route('horoscope.analysis') }}" class="block py-2 text-sm font-medium {{ request()->routeIs('horoscope.analysis') ? 'text-cosmic-700' : 'text-gray-600' }}">Analysis</a>
+
+            <div class="my-2 border-t border-gray-100"></div>
+            <p class="px-0 pb-1 text-[10px] font-semibold uppercase tracking-wider text-gray-400">Features</p>
+            <a href="{{ route('predictions.daily') }}" class="block py-2 text-sm font-medium {{ request()->routeIs('predictions.*') ? 'text-cosmic-700' : 'text-gray-600' }}">Predictions</a>
+            <a href="{{ route('muhurtham.index') }}" class="block py-2 text-sm font-medium {{ request()->routeIs('muhurtham.*') ? 'text-cosmic-700' : 'text-gray-600' }}">Muhurtham</a>
+            <a href="{{ route('compatibility.index') }}" class="block py-2 text-sm font-medium {{ request()->routeIs('compatibility.*') ? 'text-cosmic-700' : 'text-gray-600' }}">Compatibility</a>
+
+            <div class="my-2 border-t border-gray-100"></div>
+            <p class="px-0 pb-1 text-[10px] font-semibold uppercase tracking-wider text-gray-400">Account</p>
+            <a href="{{ route('wallet.index') }}" class="block py-2 text-sm font-medium {{ request()->routeIs('wallet.*') ? 'text-cosmic-700' : 'text-gray-600' }}">Wallet</a>
+            <a href="{{ route('subscription.index') }}" class="block py-2 text-sm font-medium {{ request()->routeIs('subscription.*') ? 'text-cosmic-700' : 'text-gray-600' }}">Subscription</a>
+            <a href="{{ route('profile.edit') }}" class="block py-2 text-sm font-medium {{ request()->routeIs('profile.*') ? 'text-cosmic-700' : 'text-gray-600' }}">Profile</a>
+            @if(auth()->user()->isAstrologer())
+                <a href="{{ route('astrologer.dashboard') }}" class="block py-2 text-sm font-medium {{ request()->routeIs('astrologer.*') ? 'text-cosmic-700' : 'text-gray-600' }}">Astrologer Dashboard</a>
+            @endif
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="block py-2 text-sm font-medium text-red-600">Logout</button>
