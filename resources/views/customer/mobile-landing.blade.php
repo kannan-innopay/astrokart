@@ -96,7 +96,7 @@
             </a>
 
             <p class="pt-2 text-center text-[10px] text-cosmic-400">
-                By continuing, you agree to our Terms & Privacy Policy
+                By continuing, you agree to our <a href="{{ route('terms') }}" class="underline">Terms</a> & <a href="{{ route('privacy') }}" class="underline">Privacy Policy</a>
             </p>
         </div>
     </div>

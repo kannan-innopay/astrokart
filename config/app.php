@@ -17,6 +17,8 @@ return [
 
     'company' => env('COMPANY_NAME', 'Astrokart'),
 
+    'support_email' => env('SUPPORT_EMAIL', 'support@example.com'),
+
     /*
     |--------------------------------------------------------------------------
     | Feature Flags

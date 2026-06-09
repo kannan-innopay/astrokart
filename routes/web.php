@@ -13,21 +13,21 @@ use App\Http\Controllers\Web\Astrologer\ProfileController as AstrologerProfileCo
 use App\Http\Controllers\Web\Auth\AdminLoginController;
 use App\Http\Controllers\Web\Auth\LogoutController;
 use App\Http\Controllers\Web\Auth\OtpLoginController;
-use App\Http\Controllers\Web\Customer\AstrologerBrowseController;
-use App\Http\Controllers\Web\Customer\ConsultationController;
-use App\Http\Controllers\Web\Customer\HomeController;
-use App\Http\Controllers\Web\Customer\HoraController;
-use App\Http\Controllers\Web\Customer\OnboardingController;
-use App\Http\Controllers\Web\Customer\ProfileController;
-use App\Http\Controllers\Web\Customer\HoroscopeController;
-use App\Http\Controllers\Web\Customer\TransitController;
 use App\Http\Controllers\Web\CitySearchController;
 use App\Http\Controllers\Web\Customer\AnalysisController;
+use App\Http\Controllers\Web\Customer\AstrologerBrowseController;
 use App\Http\Controllers\Web\Customer\CompatibilityController;
+use App\Http\Controllers\Web\Customer\ConsultationController;
 use App\Http\Controllers\Web\Customer\DailyPredictionController;
+use App\Http\Controllers\Web\Customer\HomeController;
+use App\Http\Controllers\Web\Customer\HoraController;
+use App\Http\Controllers\Web\Customer\HoroscopeController;
 use App\Http\Controllers\Web\Customer\MonthlyForecastController;
 use App\Http\Controllers\Web\Customer\MuhurthamController;
+use App\Http\Controllers\Web\Customer\OnboardingController;
+use App\Http\Controllers\Web\Customer\ProfileController;
 use App\Http\Controllers\Web\Customer\SubscriptionController;
+use App\Http\Controllers\Web\Customer\TransitController;
 use App\Http\Controllers\Web\Customer\WalletController;
 use Illuminate\Support\Facades\Route;
 
@@ -53,6 +53,10 @@ Route::get('astrologers', [AstrologerBrowseController::class, 'index'])->name('a
 Route::get('astrologers/{astrologer}', [AstrologerBrowseController::class, 'show'])->name('astrologers.show');
 
 Route::get('cities/search', CitySearchController::class)->name('cities.search');
+
+// --- Legal pages ---
+Route::view('privacy', 'customer.privacy')->name('privacy');
+Route::view('terms', 'customer.terms')->name('terms');
 
 Route::middleware('auth')->group(function () {
     Route::get('onboarding', [OnboardingController::class, 'show'])->name('onboarding');

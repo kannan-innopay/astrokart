@@ -28,9 +28,9 @@
                 <div>
                     <h4 class="text-xs font-semibold tracking-wider text-gray-400 uppercase">Support</h4>
                     <ul class="mt-4 space-y-2 text-sm">
-                        <li><a href="#" class="transition hover:text-gold-400">Help Center</a></li>
-                        <li><a href="#" class="transition hover:text-gold-400">Privacy Policy</a></li>
-                        <li><a href="#" class="transition hover:text-gold-400">Terms of Service</a></li>
+                        <li><a href="mailto:{{ $supportEmail }}" class="transition hover:text-gold-400">Help Center</a></li>
+                        <li><a href="{{ route('privacy') }}" class="transition hover:text-gold-400">Privacy Policy</a></li>
+                        <li><a href="{{ route('terms') }}" class="transition hover:text-gold-400">Terms of Service</a></li>
                     </ul>
                 </div>
             </div>
