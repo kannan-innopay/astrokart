@@ -204,20 +204,108 @@
                 <div class="absolute top-[30%] right-[15%] h-1.5 w-1.5 rounded-full bg-cosmic-300 animate-pulse" style="animation-delay: 0.5s"></div>
                 <div class="absolute top-[70%] left-[70%] h-1 w-1 rounded-full bg-gold-200 animate-pulse" style="animation-delay: 1s"></div>
                 <div class="absolute top-[50%] left-[25%] h-0.5 w-0.5 rounded-full bg-white animate-pulse" style="animation-delay: 1.5s"></div>
+                <div class="absolute top-[20%] right-[30%] h-0.5 w-0.5 rounded-full bg-cosmic-200 animate-pulse" style="animation-delay: 2s"></div>
+                <div class="absolute top-[80%] left-[40%] h-1 w-1 rounded-full bg-gold-300 animate-pulse" style="animation-delay: 0.8s"></div>
             </div>
             <div class="relative mx-auto max-w-3xl">
+                <p class="mb-4 text-xs font-semibold uppercase tracking-widest text-gold-400 sm:text-sm">Vedic Astrology Platform</p>
                 <h1 class="font-display text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
                     Your Stars, <br>
                     <span class="bg-gradient-to-r from-gold-400 to-gold-200 bg-clip-text text-transparent">Your Guidance</span>
                 </h1>
                 <p class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-cosmic-200">
-                    Your personal Vedic astrology companion. Get personalized birth charts, daily predictions, and cosmic guidance.
+                    Discover your Vedic birth chart, track planetary transits, find auspicious timings, and receive daily predictions — all personalized to your unique cosmic blueprint.
                 </p>
                 <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
                     @if($featureAstrologers ?? false)
                         <x-button href="{{ route('astrologers.index') }}" variant="gold" size="lg">Browse Astrologers</x-button>
                     @endif
-                    <x-button href="{{ route('login') }}" variant="gold" size="lg">Get Started</x-button>
+                    <x-button href="{{ route('login') }}" variant="gold" size="lg">Get Started Free</x-button>
+                </div>
+            </div>
+        </section>
+
+        {{-- Features grid --}}
+        <section class="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="font-display text-2xl font-bold text-gray-900 sm:text-3xl">Everything You Need from Vedic Astrology</h2>
+                <p class="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-gray-500 sm:text-base">Powered by precise astronomical calculations and traditional Jyotish wisdom.</p>
+            </div>
+
+            @php
+                $features = [
+                    [
+                        'icon' => 'M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 0 0-2.455 2.456Z',
+                        'title' => 'Birth Chart (Kundali)',
+                        'desc' => 'Generate your complete Vedic birth chart with Rashi, Navamsa, and planetary positions based on your exact birth details.',
+                        'color' => 'bg-cosmic-50 text-cosmic-600',
+                    ],
+                    [
+                        'icon' => 'M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z',
+                        'title' => 'Planetary Transits',
+                        'desc' => 'Track real-time planetary movements and understand how current transits impact your houses and life areas.',
+                        'color' => 'bg-amber-50 text-amber-600',
+                    ],
+                    [
+                        'icon' => 'M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z',
+                        'title' => 'Hora Timings',
+                        'desc' => 'Know the ruling planet for every hour of the day. Plan activities during favorable planetary hours for better outcomes.',
+                        'color' => 'bg-emerald-50 text-emerald-600',
+                    ],
+                    [
+                        'icon' => 'M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z',
+                        'title' => 'Daily Predictions',
+                        'desc' => 'Receive personalized daily and monthly predictions covering career, relationships, finance, and health.',
+                        'color' => 'bg-gold-50 text-gold-600',
+                    ],
+                    [
+                        'icon' => 'M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5',
+                        'title' => 'Muhurtham Finder',
+                        'desc' => 'Find the most auspicious dates and times for weddings, new ventures, travel, and other important life events.',
+                        'color' => 'bg-pink-50 text-pink-600',
+                    ],
+                    [
+                        'icon' => 'M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z',
+                        'title' => 'Compatibility Match',
+                        'desc' => 'Check Vedic compatibility between two birth charts with detailed Ashtakoot (8-point) and Dashakoot matching.',
+                        'color' => 'bg-rose-50 text-rose-600',
+                    ],
+                ];
+            @endphp
+
+            <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                @foreach($features as $feature)
+                    <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition hover:border-cosmic-200 hover:shadow-md">
+                        <div class="flex h-12 w-12 items-center justify-center rounded-xl {{ $feature['color'] }}">
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $feature['icon'] }}"/></svg>
+                        </div>
+                        <h3 class="mt-4 font-display text-base font-semibold text-gray-900">{{ $feature['title'] }}</h3>
+                        <p class="mt-2 text-sm leading-relaxed text-gray-500">{{ $feature['desc'] }}</p>
+                    </div>
+                @endforeach
+            </div>
+        </section>
+
+        {{-- How it works --}}
+        <section class="border-t border-gray-100 bg-surface-alt px-4 py-16 sm:px-6">
+            <div class="mx-auto max-w-4xl text-center">
+                <h2 class="font-display text-2xl font-bold text-gray-900 sm:text-3xl">Get Started in Minutes</h2>
+                <p class="mx-auto mt-3 max-w-lg text-sm text-gray-500 sm:text-base">No signup fees. Just your birth details.</p>
+                <div class="mt-10 grid grid-cols-1 gap-8 md:grid-cols-3">
+                    @php
+                        $steps = [
+                            ['step' => '1', 'title' => 'Sign In with OTP', 'desc' => 'Enter your mobile number and verify with a one-time password. No forms, no passwords to remember.'],
+                            ['step' => '2', 'title' => 'Add Birth Details', 'desc' => 'Enter your date, time, and place of birth to generate your personalized Vedic birth chart.'],
+                            ['step' => '3', 'title' => 'Explore Your Chart', 'desc' => 'View your Rashi chart, track transits, check Hora timings, and get daily predictions tailored to you.'],
+                        ];
+                    @endphp
+                    @foreach($steps as $s)
+                        <div class="flex flex-col items-center">
+                            <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-cosmic-100 font-display text-xl font-bold text-cosmic-600">{{ $s['step'] }}</div>
+                            <h3 class="mt-4 font-display text-lg font-semibold text-gray-900">{{ $s['title'] }}</h3>
+                            <p class="mt-2 text-sm leading-relaxed text-gray-500">{{ $s['desc'] }}</p>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </section>
@@ -240,29 +328,17 @@
             </section>
         @endif
 
-        {{-- How it works --}}
-        @if($featureAstrologers ?? false)
-        <section class="border-t border-gray-100 bg-surface-alt px-4 py-16 sm:px-6">
-            <div class="mx-auto max-w-4xl text-center">
-                <h2 class="font-display text-2xl font-bold text-gray-900">How It Works</h2>
-                <div class="mt-10 grid grid-cols-1 gap-8 md:grid-cols-3">
-                    @php
-                        $steps = [
-                            ['step' => '1', 'title' => 'Choose Your Astrologer', 'desc' => 'Browse verified experts by specialty, language, rating, and availability.'],
-                            ['step' => '2', 'title' => 'Start a Consultation', 'desc' => 'Recharge your wallet and begin a live chat session with your chosen astrologer.'],
-                            ['step' => '3', 'title' => 'Get Personalized Guidance', 'desc' => 'Receive insights based on your birth chart, planetary positions, and Vedic wisdom.'],
-                        ];
-                    @endphp
-                    @foreach($steps as $s)
-                        <div class="flex flex-col items-center">
-                            <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-cosmic-100 font-display text-xl font-bold text-cosmic-600">{{ $s['step'] }}</div>
-                            <h3 class="mt-4 font-display text-lg font-semibold text-gray-900">{{ $s['title'] }}</h3>
-                            <p class="mt-2 text-sm leading-relaxed text-gray-500">{{ $s['desc'] }}</p>
-                        </div>
-                    @endforeach
+        {{-- CTA --}}
+        <section class="bg-gradient-to-r from-cosmic-900 to-night-950 px-4 py-16 text-center sm:px-6">
+            <div class="mx-auto max-w-2xl">
+                <h2 class="font-display text-2xl font-bold text-white sm:text-3xl">Ready to Discover Your Cosmic Blueprint?</h2>
+                <p class="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-cosmic-200 sm:text-base">
+                    Join thousands who use {{ config('app.name') }} to navigate life with the wisdom of Vedic astrology.
+                </p>
+                <div class="mt-8">
+                    <x-button href="{{ route('login') }}" variant="gold" size="lg">Get Started Free</x-button>
                 </div>
             </div>
         </section>
-        @endif
     @endauth
 </x-layouts.customer>

@@ -26,5 +26,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::share('featureAstrologers', config('app.features.astrologers'));
+        View::share('companyName', config('app.company'));
     }
 }

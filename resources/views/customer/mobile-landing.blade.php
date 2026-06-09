@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
     <meta name="theme-color" content="#0a0618">
 
-    <title>Astrokart</title>
+    <title>{{ config('app.name') }}</title>
 
     @vite(['resources/css/app.css'])
 
@@ -59,7 +59,7 @@
 
             {{-- Brand name --}}
             <h1 class="font-display text-4xl font-bold tracking-tight text-white">
-                Astro<span class="text-gold-400">kart</span>
+                {{ config('app.name') }}
             </h1>
 
             <p class="mt-3 max-w-xs text-base leading-relaxed text-cosmic-200">

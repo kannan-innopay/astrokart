@@ -2,7 +2,7 @@
     <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <a href="{{ route('astrologer.dashboard') }}" class="flex items-center gap-2">
             <span class="font-display text-xl font-bold tracking-tight text-cosmic-900">
-                Astro<span class="text-gold-500">kart</span>
+                {{ config('app.name') }}
             </span>
             <span class="rounded-full bg-cosmic-100 px-2 py-0.5 text-xs font-medium text-cosmic-700">Astrologer</span>
         </a>

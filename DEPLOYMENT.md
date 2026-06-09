@@ -334,10 +334,10 @@ php artisan db:seed --class=CitySeeder             # 156K cities (requires datab
 php artisan tinker --execute "
 App\Models\User::create([
     'name' => 'Admin',
-    'email' => 'admin@yourdomain.com',
-    'password' => bcrypt('your-secure-password'),
+    'email' => 'admin@diaspay.in',
+    'password' => bcrypt('xxe5tT3c4XYVJXgVSB'),
     'role' => 'super_admin',
-    'mobile' => '9999999999',
+    'mobile' => '7975674736',
     'mobile_verified_at' => now(),
     'email_verified_at' => now(),
     'preferred_language' => 'en',

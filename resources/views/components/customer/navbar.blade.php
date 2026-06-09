@@ -3,7 +3,7 @@
         {{-- Logo --}}
         <a href="{{ route('home') }}" class="flex items-center gap-2">
             <span class="font-display text-xl font-bold tracking-tight text-cosmic-900">
-                Astro<span class="text-gold-500">kart</span>
+                {{ config('app.name') }}
             </span>
         </a>
 

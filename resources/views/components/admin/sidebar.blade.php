@@ -6,7 +6,7 @@
         <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2 overflow-hidden">
             <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-cosmic-600 text-sm font-bold text-white">A</div>
             <span x-show="sidebarOpen" x-transition.opacity class="font-display text-lg font-bold text-cosmic-900 whitespace-nowrap">
-                Astrokart
+                {{ config('app.name') }}
             </span>
         </a>
     </div>

@@ -16,7 +16,7 @@
             <div class="mb-8 text-center">
                 <a href="/" class="inline-block">
                     <h1 class="font-display text-3xl font-bold tracking-tight text-white">
-                        Astro<span class="text-gold-400">kart</span>
+                        {{ config('app.name') }}
                     </h1>
                 </a>
                 @isset($subtitle)

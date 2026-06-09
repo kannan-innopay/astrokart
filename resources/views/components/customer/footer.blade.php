@@ -1,7 +1,7 @@
 @auth
     {{-- Simple copyright bar for authenticated users --}}
     <footer class="border-t border-gray-100 bg-surface-alt py-4 text-center text-xs text-gray-400">
-        &copy; {{ date('Y') }} Astrokart. All rights reserved.
+        &copy; {{ date('Y') }} {{ $companyName }}. All rights reserved.
     </footer>
 @else
     {{-- Full footer for guests / marketing pages --}}
@@ -10,7 +10,7 @@
             <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
                 <div class="md:col-span-2">
                     <h3 class="font-display text-lg font-bold text-white">
-                        Astro<span class="text-gold-400">kart</span>
+                        {{ config('app.name') }}
                     </h3>
                     <p class="mt-3 max-w-sm text-sm leading-relaxed text-gray-400">
                         Connect with verified Vedic astrologers for personalized consultations. Get guidance on life, career, relationships, and more.
@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="mt-10 border-t border-white/10 pt-6 text-center text-xs text-gray-500">
-                &copy; {{ date('Y') }} Astrokart. All rights reserved.
+                &copy; {{ date('Y') }} {{ $companyName }}. All rights reserved.
             </div>
         </div>
     </footer>

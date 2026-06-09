@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="theme-color" content="#6d28d9">
 
-    <title>{{ isset($title) ? $title . ' — Astrokart' : 'Astrokart' }}</title>
+    <title>{{ isset($title) ? $title . ' — ' . config('app.name') : config('app.name') }}</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -21,7 +21,7 @@
     <header class="fixed-app-header bg-cosmic-700 text-white">
         <div class="fixed-app-header-inner">
             <h1 class="font-display text-lg font-bold tracking-tight">
-                Astro<span class="text-gold-400">kart</span>
+                {{ config('app.name') }}
             </h1>
         </div>
     </header>
