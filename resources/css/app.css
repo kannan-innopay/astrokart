@@ -1,0 +1,124 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Figtree', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+
+    /* Cosmic palette */
+    --color-cosmic-50: #f5f0ff;
+    --color-cosmic-100: #ede5ff;
+    --color-cosmic-200: #ddd0ff;
+    --color-cosmic-300: #c4a8ff;
+    --color-cosmic-400: #a67aff;
+    --color-cosmic-500: #8b4dfc;
+    --color-cosmic-600: #7c2df4;
+    --color-cosmic-700: #6b1de0;
+    --color-cosmic-800: #5a19bb;
+    --color-cosmic-900: #4a1699;
+    --color-cosmic-950: #2d0a66;
+
+    /* Gold accents */
+    --color-gold-50: #fefce8;
+    --color-gold-100: #fef9c3;
+    --color-gold-200: #fef08a;
+    --color-gold-300: #fde047;
+    --color-gold-400: #facc15;
+    --color-gold-500: #eab308;
+    --color-gold-600: #ca8a04;
+    --color-gold-700: #a16207;
+
+    /* Deep night backgrounds */
+    --color-night-800: #1a1033;
+    --color-night-900: #110a24;
+    --color-night-950: #0a0618;
+
+    /* Surface tones */
+    --color-surface: #faf9fc;
+    --color-surface-alt: #f3f0f7;
+    --color-surface-dark: #1e1433;
+}
+
+/* NativePHP safe area insets with Android fallback */
+:root {
+    --app-header-height: 3rem;
+    --app-nav-height: 4rem;
+
+    /*
+      NativePHP injects --inset-top on supported devices.
+      On some Android WebView/device combos (especially SDK 35+), the value
+      may be 0px even though the status bar overlaps. The 32px fallback
+      covers standard Android status bars and punch-hole notches.
+    */
+    --app-safe-top: max(var(--inset-top, 0px), 24px);
+    --app-safe-bottom: max(var(--inset-bottom, 0px), env(safe-area-inset-bottom, 0px));
+}
+
+.fixed-app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    height: calc(var(--app-header-height) + var(--app-safe-top));
+    padding-top: var(--app-safe-top);
+}
+
+.fixed-app-header-inner {
+    height: var(--app-header-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.fixed-app-main {
+    padding-top: calc(var(--app-header-height) + var(--app-safe-top));
+    padding-bottom: calc(var(--app-nav-height) + var(--app-safe-bottom));
+}
+
+.fixed-app-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    padding-bottom: var(--app-safe-bottom);
+}
+
+/* Landing page safe area */
+.landing-safe-top {
+    padding-top: calc(var(--app-safe-top) + 1rem);
+}
+
+.landing-safe-bottom {
+    padding-bottom: var(--app-safe-bottom);
+}
+
+/* Staggered reveal animation */
+@keyframes fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+@utility animate-fade-up {
+    animation: fade-up 0.5s ease-out both;
+}
+
+@utility animate-shimmer {
+    animation: shimmer 2s linear infinite;
+}

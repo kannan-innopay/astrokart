@@ -1,0 +1,71 @@
+<?php
+
+return [
+    'rashis' => [
+        'मेष', 'वृषभ', 'मिथुन', 'कर्क', 'सिंह', 'कन्या',
+        'तूळ', 'वृश्चिक', 'धनू', 'मकर', 'कुंभ', 'मीन',
+    ],
+    'grahas' => [
+        'Sun' => 'सूर्य', 'Moon' => 'चंद्र', 'Mars' => 'मंगळ',
+        'Mercury' => 'बुध', 'Jupiter' => 'गुरू', 'Venus' => 'शुक्र',
+        'Saturn' => 'शनी', 'Rahu' => 'राहू', 'Ketu' => 'केतू',
+    ],
+    'grahas_short' => [
+        'Sun' => 'सू', 'Moon' => 'चं', 'Mars' => 'मं',
+        'Mercury' => 'बु', 'Jupiter' => 'गु', 'Venus' => 'शु',
+        'Saturn' => 'श', 'Rahu' => 'रा', 'Ketu' => 'के',
+    ],
+    'nakshatras' => [
+        'अश्विनी', 'भरणी', 'कृत्तिका', 'रोहिणी', 'मृगशीर्ष', 'आर्द्रा',
+        'पुनर्वसु', 'पुष्य', 'आश्लेषा', 'मघा', 'पूर्व फाल्गुनी',
+        'उत्तर फाल्गुनी', 'हस्त', 'चित्रा', 'स्वाती', 'विशाखा',
+        'अनुराधा', 'ज्येष्ठा', 'मूळ', 'पूर्वाषाढा', 'उत्तराषाढा',
+        'श्रवण', 'धनिष्ठा', 'शतभिषा', 'पूर्व भाद्रपदा',
+        'उत्तर भाद्रपदा', 'रेवती',
+    ],
+    'panchanga_labels' => [
+        'tithi' => 'तिथी', 'nakshatra' => 'नक्षत्र', 'yoga' => 'योग',
+        'karana' => 'करण', 'vaara' => 'वार',
+    ],
+    'tithis' => [
+        'Shukla Pratipada' => 'शुक्ल प्रतिपदा', 'Shukla Dwitiya' => 'शुक्ल द्वितीया', 'Shukla Tritiya' => 'शुक्ल तृतीया',
+        'Shukla Chaturthi' => 'शुक्ल चतुर्थी', 'Shukla Panchami' => 'शुक्ल पंचमी', 'Shukla Shashthi' => 'शुक्ल षष्ठी',
+        'Shukla Saptami' => 'शुक्ल सप्तमी', 'Shukla Ashtami' => 'शुक्ल अष्टमी', 'Shukla Navami' => 'शुक्ल नवमी',
+        'Shukla Dashami' => 'शुक्ल दशमी', 'Shukla Ekadashi' => 'शुक्ल एकादशी', 'Shukla Dwadashi' => 'शुक्ल द्वादशी',
+        'Shukla Trayodashi' => 'शुक्ल त्रयोदशी', 'Shukla Chaturdashi' => 'शुक्ल चतुर्दशी', 'Purnima' => 'पौर्णिमा',
+        'Krishna Pratipada' => 'कृष्ण प्रतिपदा', 'Krishna Dwitiya' => 'कृष्ण द्वितीया', 'Krishna Tritiya' => 'कृष्ण तृतीया',
+        'Krishna Chaturthi' => 'कृष्ण चतुर्थी', 'Krishna Panchami' => 'कृष्ण पंचमी', 'Krishna Shashthi' => 'कृष्ण षष्ठी',
+        'Krishna Saptami' => 'कृष्ण सप्तमी', 'Krishna Ashtami' => 'कृष्ण अष्टमी', 'Krishna Navami' => 'कृष्ण नवमी',
+        'Krishna Dashami' => 'कृष्ण दशमी', 'Krishna Ekadashi' => 'कृष्ण एकादशी', 'Krishna Dwadashi' => 'कृष्ण द्वादशी',
+        'Krishna Trayodashi' => 'कृष्ण त्रयोदशी', 'Krishna Chaturdashi' => 'कृष्ण चतुर्दशी', 'Amavasya' => 'अमावास्या',
+    ],
+    'yogas' => [
+        'Vishkambha' => 'विष्कंभ', 'Priti' => 'प्रीती', 'Ayushman' => 'आयुष्मान', 'Saubhagya' => 'सौभाग्य',
+        'Shobhana' => 'शोभन', 'Atiganda' => 'अतिगंड', 'Sukarma' => 'सुकर्मा', 'Dhriti' => 'धृती',
+        'Shula' => 'शूळ', 'Ganda' => 'गंड', 'Vriddhi' => 'वृद्धी', 'Dhruva' => 'ध्रुव',
+        'Vyaghata' => 'व्याघात', 'Harshana' => 'हर्षण', 'Vajra' => 'वज्र', 'Siddhi' => 'सिद्धी',
+        'Vyatipata' => 'व्यतिपात', 'Variyan' => 'वरीयान', 'Parigha' => 'परिघ', 'Shiva' => 'शिव',
+        'Siddha' => 'सिद्ध', 'Sadhya' => 'साध्य', 'Shubha' => 'शुभ', 'Shukla' => 'शुक्ल',
+        'Brahma' => 'ब्रह्म', 'Indra' => 'इंद्र', 'Vaidhriti' => 'वैधृती',
+    ],
+    'karanas' => [
+        'Bava' => 'बव', 'Balava' => 'बालव', 'Kaulava' => 'कौलव', 'Taitila' => 'तैतिल',
+        'Garija' => 'गरज', 'Vanija' => 'वणिज', 'Vishti' => 'विष्टी',
+        'Shakuni' => 'शकुनी', 'Chatushpada' => 'चतुष्पद', 'Naga' => 'नाग', 'Kimstughna' => 'किंस्तुघ्न',
+        'Gara' => 'गर',
+    ],
+    'vaaras' => [
+        'Sunday' => 'रविवार', 'Monday' => 'सोमवार', 'Tuesday' => 'मंगळवार', 'Wednesday' => 'बुधवार',
+        'Thursday' => 'गुरुवार', 'Friday' => 'शुक्रवार', 'Saturday' => 'शनिवार',
+    ],
+    'ui' => [
+        'ascendant' => 'लग्न', 'asc' => 'लग्न', 'ayanamsa' => 'अयनांश',
+        'pada' => 'पाद', 'birth_chart' => 'जन्म कुंडली (राशी)',
+        'planetary_positions' => 'ग्रह स्थिती',
+        'graha' => 'ग्रह', 'rashi' => 'राशी', 'degrees' => 'अंश',
+        'nakshatra' => 'नक्षत्र', 'house' => 'भाव', 'motion' => 'गती',
+        'retrograde' => 'वक्री', 'direct' => 'मार्गी',
+        'south_indian' => 'दक्षिण भारतीय', 'north_indian' => 'उत्तर भारतीय',
+        'language' => 'भाषा',
+    ],
+];

@@ -1,0 +1,42 @@
+<form action="test.php" method="post">
+   <table>
+      <tr>
+         <td><strong>Amount:</strong></td>
+         <td><input type="text" name="amount" value="10"></td>
+      </tr>
+      <tr>
+         <td><strong>Description:</strong></td>
+         <td><input type="text" name="description" value="Test Transaction"></td>
+      </tr>
+      <tr>
+         <td><strong>Name:</strong></td>
+         <td><input type="text" name="name" value="Your Name"></td>
+      </tr>
+      <tr>
+         <td><strong>Mobile:</strong></td>
+         <td><input type="text" name="mobile" value="0000000000"></td>
+      </tr>
+      <tr>
+         <td><strong>Email:</strong></td>
+         <td><input type="text" name="email" value="yourname@switchpay.in"></td>
+      </tr>
+      <tr>
+         <td><strong>Payment Method:</strong></td>
+         <td><input type="text" name="enabledModesOfPayment" value="cc|upi"></td>
+      </tr>
+      <tr>
+         <td><strong>Payment Mode:</strong> </td>
+         <td>
+            <input type="radio" name="payment_method" value="REGULAR" checked>Web Flow
+         </td>
+      </tr>
+      <tr>
+         <td><strong>Callback URL:</strong></td>
+         <td><input type="text" name="callback_url" value="http://switchpaysample.test/callback.php"></td>
+      </tr>
+      <tr>
+         <td><input type="submit"></td>
+      </tr>
+
+   </table>
+</form>

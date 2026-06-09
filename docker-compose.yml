@@ -1,0 +1,14 @@
+services:
+  horoscope:
+    build:
+      context: ./horoscope-service
+      dockerfile: Dockerfile
+    ports:
+      - "8100:8100"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/api/chart/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
