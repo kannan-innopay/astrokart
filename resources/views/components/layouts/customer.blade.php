@@ -5,7 +5,7 @@
     </x-layouts.mobile>
 @else
     {{-- Web: standard navbar + footer --}}
-    <x-layouts.base :title="$title ?? null">
+    <x-layouts.base :title="$title ?? null" :description="$description ?? null" :og-image="$ogImage ?? null">
         <div class="flex min-h-screen flex-col">
             <x-customer.navbar />
 

@@ -19,6 +19,8 @@ return [
 
     'support_email' => env('SUPPORT_EMAIL', 'support@example.com'),
 
+    'description' => env('APP_DESCRIPTION', 'Your personal Vedic astrology companion. Get personalized birth charts, daily predictions, planetary transits, and cosmic guidance.'),
+
     /*
     |--------------------------------------------------------------------------
     | Feature Flags
