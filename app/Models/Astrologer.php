@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Concerns\HasUuid;
-
 use App\Enums\AstrologerStatus;
 use Database\Factories\AstrologerFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -12,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 #[Fillable([
     'user_id',
@@ -68,6 +68,16 @@ class Astrologer extends Model
     public function documents(): HasMany
     {
         return $this->hasMany(AstrologerDocument::class);
+    }
+
+    public function photos(): HasMany
+    {
+        return $this->hasMany(AstrologerPhoto::class)->orderBy('sort_order');
+    }
+
+    public function primaryPhoto(): HasOne
+    {
+        return $this->hasOne(AstrologerPhoto::class)->where('is_primary', true);
     }
 
     public function availabilities(): HasMany

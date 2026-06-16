@@ -23,6 +23,7 @@
                             <li><a href="{{ route('astrologers.index') }}" class="transition hover:text-gold-400">Browse Astrologers</a></li>
                         @endif
                         <li><a href="{{ route('home') }}" class="transition hover:text-gold-400">Home</a></li>
+                        <li><a href="{{ route('astrologer.register.show') }}" class="transition hover:text-gold-400">Become an Astrologer</a></li>
                     </ul>
                 </div>
                 <div>

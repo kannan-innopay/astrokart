@@ -6,10 +6,13 @@ use App\Enums\AstrologerStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UpdateAstrologerStatusRequest;
 use App\Models\Astrologer;
+use App\Models\AstrologerDocument;
 use App\Services\AstrologerService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class AstrologerManagementController extends Controller
 {
@@ -33,7 +36,7 @@ class AstrologerManagementController extends Controller
     public function show(Astrologer $astrologer): View
     {
         return view('admin.astrologers.show', [
-            'astrologer' => $astrologer->load(['user', 'expertises', 'languages', 'documents', 'availabilities']),
+            'astrologer' => $astrologer->load(['user', 'expertises', 'languages', 'documents', 'photos', 'availabilities']),
         ]);
     }
 
@@ -46,5 +49,12 @@ class AstrologerManagementController extends Controller
         );
 
         return back()->with('success', 'Astrologer status updated.');
+    }
+
+    public function downloadDocument(AstrologerDocument $document): StreamedResponse
+    {
+        abort_unless(Storage::disk('local')->exists($document->file_path), 404);
+
+        return Storage::disk('local')->download($document->file_path);
     }
 }

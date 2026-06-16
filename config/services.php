@@ -41,6 +41,7 @@ return [
         'templates' => [
             'login' => env('MSG91_TEMPLATE_LOGIN'),
             'registration' => env('MSG91_TEMPLATE_REGISTRATION'),
+            'astrologer_approved' => env('MSG91_TEMPLATE_ASTROLOGER_APPROVED'),
         ],
         'otp_length' => env('MSG91_OTP_LENGTH', 6),
         'otp_expiry' => env('MSG91_OTP_EXPIRY', 10),

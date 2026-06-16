@@ -1,4 +1,4 @@
-<x-layouts.auth title="Login" subtitle="Enter your mobile number to get started">
+<x-layouts.auth title="Join as an Astrologer" subtitle="Verify your mobile number to begin your application">
     <div x-data="{
         step: '{{ session('otp_sent') ? 'verify' : 'mobile' }}',
         mobile: '{{ old('mobile', '') }}',
@@ -7,7 +7,7 @@
         {{-- Step 1: Mobile number --}}
         <form x-show="step === 'mobile'"
               method="POST"
-              action="{{ route('login.otp.request') }}"
+              action="{{ route('astrologer.register.otp.request') }}"
               @submit="loading = true">
             @csrf
 
@@ -50,7 +50,7 @@
         <form x-show="step === 'verify'"
               x-cloak
               method="POST"
-              action="{{ route('login.otp.verify') }}"
+              action="{{ route('astrologer.register.otp.verify') }}"
               @submit="loading = true">
             @csrf
             <input type="hidden" name="mobile" :value="mobile">
@@ -76,7 +76,7 @@
                 <button type="submit"
                         :disabled="loading"
                         class="w-full rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 px-5 py-3 text-sm font-semibold text-night-950 shadow-lg shadow-gold-500/25 transition hover:from-gold-600 hover:to-gold-700 disabled:opacity-50">
-                    <span x-show="!loading">Verify & Login</span>
+                    <span x-show="!loading">Verify & Continue</span>
                     <span x-show="loading" class="flex items-center justify-center gap-2">
                         <svg class="h-4 w-4 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
                         Verifying...
@@ -86,13 +86,7 @@
         </form>
 
         <p class="mt-6 text-center text-xs text-cosmic-300/60">
-            Are you an astrologer? <a href="{{ route('astrologer.register.show') }}" class="text-gold-400 hover:text-gold-300">Join our platform</a>
+            Looking for a reading? <a href="{{ route('login') }}" class="text-cosmic-300 hover:text-white">Login as a customer</a>
         </p>
-
-        @unless(($isNativeApp ?? false) || preg_match('/Mobile|Android|iPhone|iPad/i', request()->userAgent() ?? ''))
-            <p class="mt-2 text-center text-xs text-cosmic-300/60">
-                Admin? <a href="{{ route('admin.login') }}" class="text-cosmic-300 hover:text-white">Login here</a>
-            </p>
-        @endunless
     </div>
 </x-layouts.auth>

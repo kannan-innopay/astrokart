@@ -95,6 +95,11 @@
                 <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
             </a>
 
+            <a href="{{ route('astrologer.register.show') }}"
+               class="block text-center text-xs font-medium text-cosmic-200 underline-offset-2 hover:underline">
+                Are you an astrologer? Join here
+            </a>
+
             <p class="pt-2 text-center text-[10px] text-cosmic-400">
                 By continuing, you agree to our <a href="{{ route('terms') }}" class="underline">Terms</a> & <a href="{{ route('privacy') }}" class="underline">Privacy Policy</a>
             </p>

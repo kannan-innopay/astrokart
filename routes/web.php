@@ -10,6 +10,7 @@ use App\Http\Controllers\Web\Astrologer\ConsultationController as AstrologerCons
 use App\Http\Controllers\Web\Astrologer\DashboardController as AstrologerDashboardController;
 use App\Http\Controllers\Web\Astrologer\OnlineStatusController;
 use App\Http\Controllers\Web\Astrologer\ProfileController as AstrologerProfileController;
+use App\Http\Controllers\Web\Astrologer\RegistrationController as AstrologerRegistrationController;
 use App\Http\Controllers\Web\Auth\AdminLoginController;
 use App\Http\Controllers\Web\Auth\LogoutController;
 use App\Http\Controllers\Web\Auth\OtpLoginController;
@@ -102,6 +103,19 @@ Route::middleware('auth')->group(function () {
     Route::get('consultations', [ConsultationController::class, 'history'])->name('consultations.history');
 });
 
+// --- Astrologer signup (public, available regardless of FEATURE_ASTROLOGERS) ---
+Route::prefix('astrologer/register')->name('astrologer.register.')->group(function () {
+    Route::get('/', [AstrologerRegistrationController::class, 'show'])->name('show');
+    Route::post('otp/request', [AstrologerRegistrationController::class, 'requestOtp'])->name('otp.request');
+    Route::post('otp/verify', [AstrologerRegistrationController::class, 'verifyOtp'])->name('otp.verify');
+
+    Route::middleware('auth')->group(function () {
+        Route::get('profile', [AstrologerRegistrationController::class, 'profile'])->name('profile');
+        Route::post('profile', [AstrologerRegistrationController::class, 'store'])->name('store');
+        Route::get('status', [AstrologerRegistrationController::class, 'status'])->name('status');
+    });
+});
+
 // --- Astrologer (/astrologer) ---
 Route::prefix('astrologer')->name('astrologer.')->middleware(['auth', 'role:astrologer'])->group(function () {
     Route::get('dashboard', [AstrologerDashboardController::class, 'index'])->name('dashboard');
@@ -126,6 +140,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin,super_ad
     Route::get('astrologers', [AdminAstrologerController::class, 'index'])->name('astrologers.index');
     Route::get('astrologers/{astrologer}', [AdminAstrologerController::class, 'show'])->name('astrologers.show');
     Route::patch('astrologers/{astrologer}/status', [AdminAstrologerController::class, 'updateStatus'])->name('astrologers.update-status');
+    Route::get('astrologer-documents/{document}/download', [AdminAstrologerController::class, 'downloadDocument'])->name('astrologer-documents.download');
 
     Route::resource('expertises', ExpertiseManagementController::class)->except(['show']);
     Route::resource('languages', LanguageManagementController::class)->except(['show']);

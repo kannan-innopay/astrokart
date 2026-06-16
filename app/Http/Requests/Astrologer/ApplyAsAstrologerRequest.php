@@ -21,7 +21,7 @@ class ApplyAsAstrologerRequest extends FormRequest
         return [
             'bio' => ['nullable', 'string', 'max:2000'],
             'years_of_experience' => ['required', 'integer', 'min:0', 'max:100'],
-            'price_per_minute' => ['required', 'integer', 'min:100'],
+            'price_per_minute' => ['required', 'integer', 'min:5'],
             'consultation_modes' => ['sometimes', 'array', 'min:1'],
             'consultation_modes.*' => [Rule::enum(ConsultationMode::class)],
             'expertise_ids' => ['required', 'array', 'min:1'],

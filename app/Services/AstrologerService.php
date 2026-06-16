@@ -2,11 +2,16 @@
 
 namespace App\Services;
 
+use App\Enums\AstrologerDocumentType;
 use App\Enums\AstrologerStatus;
+use App\Enums\ConsultationMode;
 use App\Enums\UserRole;
+use App\Jobs\SendAstrologerApprovedSms;
 use App\Models\Astrologer;
 use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class AstrologerService
@@ -39,6 +44,88 @@ class AstrologerService
         }
 
         return $astrologer->load(['expertises', 'languages', 'user']);
+    }
+
+    /**
+     * Complete the public astrologer signup wizard: create the profile, attach
+     * expertise/languages, store uploaded photos and KYC documents, and capture
+     * bank settlement details. The profile starts as Applied, pending admin review.
+     *
+     * @param  array<string, mixed>  $data
+     */
+    public function register(User $user, array $data): Astrologer
+    {
+        if (Astrologer::where('user_id', $user->id)->exists()) {
+            throw ValidationException::withMessages([
+                'user' => ['You have already registered as an astrologer.'],
+            ]);
+        }
+
+        $photoPaths = collect($data['photos'] ?? [])
+            ->map(fn (UploadedFile $photo): string => $photo->store('astrologer-photos', 'public'));
+
+        return DB::transaction(function () use ($user, $data, $photoPaths) {
+            $user->update([
+                'name' => $data['name'],
+                'role' => UserRole::Astrologer,
+            ]);
+
+            $astrologer = Astrologer::create([
+                'user_id' => $user->id,
+                'photo' => $photoPaths->first(),
+                'bio' => $data['bio'] ?? null,
+                'years_of_experience' => $data['years_of_experience'],
+                'price_per_minute' => $data['price_per_minute'],
+                'consultation_modes' => $data['consultation_modes'] ?? [ConsultationMode::Chat->value],
+                'status' => AstrologerStatus::Applied,
+                'bank_account_name' => $data['bank_account_name'] ?? null,
+                'bank_account_number' => $data['bank_account_number'] ?? null,
+                'bank_ifsc_code' => $data['bank_ifsc_code'] ?? null,
+                'upi_id' => $data['upi_id'] ?? null,
+            ]);
+
+            $astrologer->expertises()->attach($data['expertise_ids']);
+            $astrologer->languages()->attach($data['language_ids']);
+
+            $photoPaths->each(fn (string $path, int $index) => $astrologer->photos()->create([
+                'file_path' => $path,
+                'is_primary' => $index === 0,
+                'sort_order' => $index,
+            ]));
+
+            $this->storeKycDocuments($astrologer, $data);
+
+            return $astrologer->load(['expertises', 'languages', 'photos', 'documents', 'user']);
+        });
+    }
+
+    /**
+     * Persist any uploaded KYC documents (Aadhaar, PAN, certificate) to the
+     * private disk. All KYC is optional, so missing files are skipped.
+     *
+     * @param  array<string, mixed>  $data
+     */
+    private function storeKycDocuments(Astrologer $astrologer, array $data): void
+    {
+        $documents = [
+            [AstrologerDocumentType::Aadhaar, 'aadhaar_number', 'aadhaar_file'],
+            [AstrologerDocumentType::Pan, 'pan_number', 'pan_file'],
+            [AstrologerDocumentType::Certificate, null, 'certificate_file'],
+        ];
+
+        foreach ($documents as [$type, $numberKey, $fileKey]) {
+            $file = $data[$fileKey] ?? null;
+
+            if (! $file instanceof UploadedFile) {
+                continue;
+            }
+
+            $astrologer->documents()->create([
+                'document_type' => $type,
+                'document_number' => $numberKey ? ($data[$numberKey] ?? null) : null,
+                'file_path' => $file->store('astrologer-documents', 'local'),
+            ]);
+        }
     }
 
     public function updateProfile(Astrologer $astrologer, array $data): Astrologer
@@ -140,6 +227,8 @@ class AstrologerService
 
     public function updateStatus(Astrologer $astrologer, AstrologerStatus $status, ?string $notes = null): Astrologer
     {
+        $wasApproved = $astrologer->status === AstrologerStatus::Approved;
+
         $data = ['status' => $status];
 
         if ($notes !== null) {
@@ -155,6 +244,10 @@ class AstrologerService
         }
 
         $astrologer->update($data);
+
+        if ($status === AstrologerStatus::Approved && ! $wasApproved) {
+            SendAstrologerApprovedSms::dispatch($astrologer);
+        }
 
         return $astrologer->fresh(['user', 'expertises', 'languages']);
     }

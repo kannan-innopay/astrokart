@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Enums\AstrologerDocumentType;
 use Database\Factories\AstrologerDocumentFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[Fillable(['astrologer_id', 'document_type', 'file_path', 'is_verified', 'verified_at', 'notes'])]
+#[Fillable(['astrologer_id', 'document_type', 'document_number', 'file_path', 'is_verified', 'verified_at', 'notes'])]
 class AstrologerDocument extends Model
 {
     /** @use HasFactory<AstrologerDocumentFactory> */
@@ -17,6 +18,7 @@ class AstrologerDocument extends Model
     protected function casts(): array
     {
         return [
+            'document_type' => AstrologerDocumentType::class,
             'is_verified' => 'boolean',
             'verified_at' => 'datetime',
         ];

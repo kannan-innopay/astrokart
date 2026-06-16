@@ -42,6 +42,49 @@
                 </div>
             </x-card>
 
+            @if($astrologer->photos->isNotEmpty())
+                <x-card title="Profile Photos">
+                    <div class="grid grid-cols-3 gap-3 sm:grid-cols-4">
+                        @foreach($astrologer->photos as $photo)
+                            <a href="{{ $photo->url }}" target="_blank" class="relative block">
+                                <img src="{{ $photo->url }}" alt="Photo" class="h-24 w-full rounded-lg object-cover ring-1 ring-gray-200">
+                                @if($photo->is_primary)
+                                    <span class="absolute left-1 top-1 rounded bg-gold-500 px-1.5 py-0.5 text-[10px] font-semibold text-night-950">Primary</span>
+                                @endif
+                            </a>
+                        @endforeach
+                    </div>
+                </x-card>
+            @endif
+
+            <x-card title="KYC Documents">
+                @forelse($astrologer->documents as $document)
+                    <div class="flex items-center justify-between border-b border-gray-100 py-2.5 last:border-0">
+                        <div>
+                            <p class="text-sm font-medium text-gray-900">{{ $document->document_type->label() }}</p>
+                            @if($document->document_number)
+                                <p class="text-xs text-gray-500">{{ $document->document_number }}</p>
+                            @endif
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <x-badge :color="$document->is_verified ? 'green' : 'gray'">{{ $document->is_verified ? 'Verified' : 'Unverified' }}</x-badge>
+                            <a href="{{ route('admin.astrologer-documents.download', $document) }}" class="text-sm font-medium text-cosmic-600 hover:text-cosmic-700">Download</a>
+                        </div>
+                    </div>
+                @empty
+                    <p class="text-sm text-gray-400">No KYC documents uploaded. This astrologer is unverified.</p>
+                @endforelse
+            </x-card>
+
+            <x-card title="Settlement / Bank Details">
+                <dl class="space-y-3 text-sm">
+                    <div class="flex justify-between"><dt class="text-gray-500">Account Name</dt><dd class="text-gray-900">{{ $astrologer->bank_account_name ?: '—' }}</dd></div>
+                    <div class="flex justify-between"><dt class="text-gray-500">Account Number</dt><dd class="text-gray-900">{{ $astrologer->bank_account_number ?: '—' }}</dd></div>
+                    <div class="flex justify-between"><dt class="text-gray-500">IFSC</dt><dd class="text-gray-900">{{ $astrologer->bank_ifsc_code ?: '—' }}</dd></div>
+                    <div class="flex justify-between"><dt class="text-gray-500">UPI ID</dt><dd class="text-gray-900">{{ $astrologer->upi_id ?: '—' }}</dd></div>
+                </dl>
+            </x-card>
+
             @if($astrologer->verification_notes)
                 <x-card title="Verification Notes">
                     <p class="text-sm text-gray-600">{{ $astrologer->verification_notes }}</p>

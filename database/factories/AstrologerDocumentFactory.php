@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\AstrologerDocumentType;
 use App\Models\Astrologer;
 use App\Models\AstrologerDocument;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -15,8 +16,9 @@ class AstrologerDocumentFactory extends Factory
     {
         return [
             'astrologer_id' => Astrologer::factory(),
-            'document_type' => fake()->randomElement(['identity_proof', 'certification', 'experience_letter']),
-            'file_path' => 'documents/'.fake()->uuid().'.pdf',
+            'document_type' => fake()->randomElement(AstrologerDocumentType::cases()),
+            'document_number' => fake()->bothify('??########'),
+            'file_path' => 'astrologer-documents/'.fake()->uuid().'.pdf',
             'is_verified' => false,
         ];
     }

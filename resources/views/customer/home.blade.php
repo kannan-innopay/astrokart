@@ -340,5 +340,23 @@
                 </div>
             </div>
         </section>
+
+        {{-- Become an Astrologer --}}
+        <section class="border-t border-gray-100 bg-surface-alt px-4 py-16 sm:px-6">
+            <div class="mx-auto flex max-w-4xl flex-col items-center gap-6 text-center md:flex-row md:text-left">
+                <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gold-100 text-gold-600">
+                    <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/></svg>
+                </div>
+                <div class="flex-1">
+                    <h2 class="font-display text-xl font-bold text-gray-900 sm:text-2xl">Are You a Vedic Astrologer?</h2>
+                    <p class="mt-2 text-sm leading-relaxed text-gray-500 sm:text-base">
+                        Join {{ config('app.name') }} to reach thousands of seekers, consult on your own schedule, and grow your practice. Verified profiles get a trust badge and higher visibility.
+                    </p>
+                </div>
+                <div class="shrink-0">
+                    <x-button href="{{ route('astrologer.register.show') }}" variant="primary" size="lg">Become an Astrologer</x-button>
+                </div>
+            </div>
+        </section>
     @endauth
 </x-layouts.customer>

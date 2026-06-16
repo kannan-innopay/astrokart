@@ -21,7 +21,7 @@ class UpdateAstrologerProfileRequest extends FormRequest
         return [
             'bio' => ['sometimes', 'nullable', 'string', 'max:2000'],
             'years_of_experience' => ['sometimes', 'integer', 'min:0', 'max:100'],
-            'price_per_minute' => ['sometimes', 'integer', 'min:100'],
+            'price_per_minute' => ['sometimes', 'integer', 'min:5'],
             'consultation_modes' => ['sometimes', 'array', 'min:1'],
             'consultation_modes.*' => [Rule::enum(ConsultationMode::class)],
             'expertise_ids' => ['sometimes', 'array', 'min:1'],

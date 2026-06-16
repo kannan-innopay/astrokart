@@ -33,6 +33,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Seeder Credentials
+    |--------------------------------------------------------------------------
+    |
+    | Default passwords used by UserSeeder when creating the admin accounts.
+    | Override these in production before seeding.
+    |
+    */
+
+    'seed' => [
+        'super_admin_password' => env('SEED_SUPER_ADMIN_PASSWORD', 'password'),
+        'admin_password' => env('SEED_ADMIN_PASSWORD', 'password'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
     |

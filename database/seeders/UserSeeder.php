@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Enums\AstrologerStatus;
 use App\Enums\ConsultationMode;
 use App\Models\Astrologer;
 use App\Models\Expertise;
@@ -10,6 +9,7 @@ use App\Models\Language;
 use App\Models\User;
 use App\Models\Wallet;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
             'name' => 'Super Admin',
             'email' => 'superadmin@astrokart.com',
             'mobile' => '9000000001',
+            'password' => Hash::make(config('app.seed.super_admin_password')),
         ]);
         Wallet::factory()->for($superAdmin)->create(['balance' => 0]);
 
@@ -28,6 +29,7 @@ class UserSeeder extends Seeder
             'name' => 'Admin User',
             'email' => 'admin@astrokart.com',
             'mobile' => '9000000002',
+            'password' => Hash::make(config('app.seed.admin_password')),
         ]);
         Wallet::factory()->for($admin)->create(['balance' => 0]);
 
