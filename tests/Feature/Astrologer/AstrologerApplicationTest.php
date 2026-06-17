@@ -4,7 +4,7 @@ use App\Models\Expertise;
 use App\Models\Language;
 use App\Models\User;
 
-test('it allows a customer to apply as astrologer', function () {
+test('it prevents a customer number from applying as astrologer', function () {
     $user = User::factory()->customer()->create();
     $expertises = Expertise::factory(2)->create();
     $languages = Language::factory(2)->create();
@@ -19,17 +19,16 @@ test('it allows a customer to apply as astrologer', function () {
             'language_ids' => $languages->pluck('id')->toArray(),
         ]);
 
-    $response->assertCreated()
-        ->assertJsonPath('data.years_of_experience', 10)
-        ->assertJsonPath('data.price_per_minute', 2500)
-        ->assertJsonPath('data.status', 'applied');
+    $response->assertUnprocessable()
+        ->assertJsonValidationErrors(['mobile']);
 
     $user->refresh();
-    expect($user->role->value)->toBe('astrologer');
+    expect($user->role->value)->toBe('customer');
+    expect($user->astrologerProfile)->toBeNull();
 });
 
 test('it creates astrologer profile with expertises and languages', function () {
-    $user = User::factory()->customer()->create();
+    $user = User::factory()->astrologer()->create();
     $expertises = Expertise::factory(3)->create();
     $languages = Language::factory(2)->create();
 
@@ -47,7 +46,7 @@ test('it creates astrologer profile with expertises and languages', function () 
 });
 
 test('it rejects duplicate application', function () {
-    $user = User::factory()->customer()->create();
+    $user = User::factory()->astrologer()->create();
     $expertise = Expertise::factory()->create();
     $language = Language::factory()->create();
 

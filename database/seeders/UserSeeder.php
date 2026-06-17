@@ -22,7 +22,8 @@ class UserSeeder extends Seeder
 
         $this->createAdmin(
             'Admin User',
-            'admin@diaspay.in',
+            'admin@diaspay.in
+            ',
             '9000000002',
             UserRole::Admin,
             (string) config('app.seed.admin_password'),

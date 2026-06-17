@@ -24,6 +24,13 @@ class AstrologerService
             ]);
         }
 
+        // A number registered as a customer cannot be reused to become an astrologer.
+        if ($user->isCustomer()) {
+            throw ValidationException::withMessages([
+                'mobile' => [__('astrologer.number_is_customer')],
+            ]);
+        }
+
         $user->update(['role' => UserRole::Astrologer]);
 
         $astrologer = Astrologer::create([

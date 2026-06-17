@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web\Astrologer;
 
+use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Astrologer\RegisterAstrologerRequest;
 use App\Http\Requests\Auth\RequestOtpRequest;
@@ -49,6 +50,7 @@ class RegistrationController extends Controller
         $user = $this->authService->verifyOtpAndGetUser(
             $request->validated('mobile'),
             $request->validated('otp'),
+            UserRole::Astrologer,
         );
 
         Auth::login($user, remember: true);
@@ -62,6 +64,10 @@ class RegistrationController extends Controller
      */
     public function profile(Request $request): View|RedirectResponse
     {
+        if ($redirect = $this->guardAgainstCustomer($request)) {
+            return $redirect;
+        }
+
         if ($request->user()->astrologerProfile) {
             return redirect()->route('astrologer.register.status');
         }
@@ -74,6 +80,10 @@ class RegistrationController extends Controller
 
     public function store(RegisterAstrologerRequest $request): RedirectResponse
     {
+        if ($redirect = $this->guardAgainstCustomer($request)) {
+            return $redirect;
+        }
+
         if ($request->user()->astrologerProfile) {
             return redirect()->route('astrologer.register.status');
         }
@@ -107,5 +117,19 @@ class RegistrationController extends Controller
         }
 
         return redirect()->route('astrologer.register.profile');
+    }
+
+    /**
+     * A number already registered as a customer cannot become an astrologer.
+     * This closes the loophole of an authenticated customer navigating
+     * straight to the astrologer profile step.
+     */
+    private function guardAgainstCustomer(Request $request): ?RedirectResponse
+    {
+        if ($request->user()->isCustomer()) {
+            return redirect()->route('home')->with('error', __('astrologer.number_is_customer'));
+        }
+
+        return null;
     }
 }

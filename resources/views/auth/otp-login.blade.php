@@ -88,11 +88,5 @@
         <p class="mt-6 text-center text-xs text-cosmic-300/60">
             Are you an astrologer? <a href="{{ route('astrologer.register.show') }}" class="text-gold-400 hover:text-gold-300">Join our platform</a>
         </p>
-
-        @unless(($isNativeApp ?? false) || preg_match('/Mobile|Android|iPhone|iPad/i', request()->userAgent() ?? ''))
-            <p class="mt-2 text-center text-xs text-cosmic-300/60">
-                Admin? <a href="{{ route('admin.login') }}" class="text-cosmic-300 hover:text-white">Login here</a>
-            </p>
-        @endunless
     </div>
 </x-layouts.auth>

@@ -20,7 +20,7 @@ class AuthService
         return $this->otpService->sendOtp($mobile);
     }
 
-    public function verifyOtpAndGetUser(string $mobile, string $otp): User
+    public function verifyOtpAndGetUser(string $mobile, string $otp, UserRole $intendedRole = UserRole::Customer): User
     {
         if (! $this->otpService->verifyOtp($mobile, $otp)) {
             throw ValidationException::withMessages([
@@ -28,17 +28,21 @@ class AuthService
             ]);
         }
 
-        $user = User::firstOrCreate(
-            ['mobile' => $mobile],
-            [
-                'name' => 'User',
-                'role' => UserRole::Customer,
-                'mobile_verified_at' => now(),
-            ]
-        );
+        $user = User::where('mobile', $mobile)->first();
 
-        if (! $user->mobile_verified_at) {
-            $user->update(['mobile_verified_at' => now()]);
+        if ($user) {
+            $this->guardRoleMatches($user, $intendedRole);
+
+            if (! $user->mobile_verified_at) {
+                $user->update(['mobile_verified_at' => now()]);
+            }
+        } else {
+            $user = User::create([
+                'name' => 'User',
+                'mobile' => $mobile,
+                'role' => $intendedRole,
+                'mobile_verified_at' => now(),
+            ]);
         }
 
         if (! $user->wallet) {
@@ -49,6 +53,29 @@ class AuthService
         }
 
         return $user->fresh(['wallet']);
+    }
+
+    /**
+     * A mobile number is locked to a single role at first signup: it cannot be
+     * reused to sign up as the other role (customer vs astrologer). Admins are
+     * exempt as they authenticate via email.
+     */
+    private function guardRoleMatches(User $user, UserRole $intendedRole): void
+    {
+        if ($user->isAdmin()) {
+            return;
+        }
+
+        $existingIsAstrologer = $user->role === UserRole::Astrologer;
+        $intendedIsAstrologer = $intendedRole === UserRole::Astrologer;
+
+        if ($existingIsAstrologer !== $intendedIsAstrologer) {
+            throw ValidationException::withMessages([
+                'mobile' => [$intendedIsAstrologer
+                    ? __('astrologer.number_is_customer')
+                    : __('astrologer.number_is_astrologer')],
+            ]);
+        }
     }
 
     /**

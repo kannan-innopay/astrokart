@@ -22,6 +22,8 @@ return [
     'fix_following' => 'Please fix the following:',
     'step_progress' => 'Step :current of :total',
     'language' => 'Language',
+    'number_is_customer' => 'This mobile number is already registered as a customer. Please use a different number to join as an astrologer.',
+    'number_is_astrologer' => 'This mobile number is registered as an astrologer account. Please use a different number to continue as a customer.',
     'steps' => [
         'details' => 'Details',
         'photos' => 'Photos',
