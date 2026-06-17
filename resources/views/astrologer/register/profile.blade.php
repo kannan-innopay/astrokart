@@ -1,5 +1,5 @@
 <x-layouts.base title="Astrologer Application">
-    <div class="min-h-screen bg-gradient-to-br from-night-950 via-night-900 to-cosmic-950 px-4 py-10">
+    <div class="min-h-screen bg-gradient-to-br from-night-950 via-night-900 to-cosmic-950 px-4 py-6 sm:py-10">
         @php
             $stepFields = [
                 1 => ['name', 'bio', 'years_of_experience', 'price_per_minute', 'consultation_modes', 'expertise_ids', 'language_ids'],
@@ -39,12 +39,13 @@
                   action="{{ route('astrologer.register.store') }}"
                   enctype="multipart/form-data"
                   novalidate
+                  class="signup-form"
                   x-data="astrologerSignup()"
                   @submit="submitting = true">
                 @csrf
 
                 {{-- Progress --}}
-                <div class="mb-5 flex items-center justify-between gap-2">
+                <div class="mb-2 flex items-center justify-between gap-2">
                     <template x-for="(label, i) in steps" :key="i">
                         <div class="flex flex-1 items-center gap-2">
                             <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold transition"
@@ -54,8 +55,12 @@
                         </div>
                     </template>
                 </div>
+                {{-- Current step label (mobile) --}}
+                <p class="mb-4 text-xs font-medium text-cosmic-200 sm:hidden">
+                    Step <span x-text="step"></span> of 4 · <span class="text-white" x-text="steps[step - 1]"></span>
+                </p>
 
-                <div class="rounded-2xl border border-white/10 bg-white p-6 shadow-2xl shadow-cosmic-950/50">
+                <div class="rounded-2xl border border-white/10 bg-white p-5 shadow-2xl shadow-cosmic-950/50 sm:p-6">
 
                     {{-- Step 1: Professional details --}}
                     <div x-show="step === 1" class="space-y-4">
@@ -77,33 +82,45 @@
                                 @foreach($modes as $value => $label)
                                     <label class="cursor-pointer">
                                         <input type="checkbox" name="consultation_modes[]" value="{{ $value }}" class="peer sr-only" @checked(in_array($value, $selectedModes))>
-                                        <span class="inline-block rounded-lg border border-gray-200 px-3 py-1.5 text-sm text-gray-600 peer-checked:border-cosmic-500 peer-checked:bg-cosmic-50 peer-checked:text-cosmic-700">{{ $label }}</span>
+                                        <span class="inline-block rounded-lg border border-gray-200 px-3.5 py-2 text-sm text-gray-600 peer-checked:border-cosmic-500 peer-checked:bg-cosmic-50 peer-checked:text-cosmic-700">{{ $label }}</span>
                                     </label>
                                 @endforeach
                             </div>
                         </div>
 
                         <div>
-                            <span class="mb-1.5 block text-sm font-medium text-gray-700">Expertise <span class="text-red-500">*</span></span>
+                            <div class="mb-1.5 flex items-baseline gap-2">
+                                <span class="text-sm font-medium text-gray-700">Expertise <span class="text-red-500">*</span></span>
+                                <span class="text-xs text-gray-400">Select all that apply</span>
+                            </div>
                             <div class="flex flex-wrap gap-2">
                                 @php($selectedExpertise = old('expertise_ids', []))
                                 @foreach($expertises as $expertise)
-                                    <label class="cursor-pointer">
-                                        <input type="checkbox" name="expertise_ids[]" value="{{ $expertise->id }}" class="peer sr-only" @checked(in_array($expertise->id, $selectedExpertise))>
-                                        <span class="inline-block rounded-lg border border-gray-200 px-3 py-1.5 text-sm text-gray-600 peer-checked:border-cosmic-500 peer-checked:bg-cosmic-50 peer-checked:text-cosmic-700">{{ $expertise->name }}</span>
+                                    <label class="group cursor-pointer">
+                                        <input type="checkbox" name="expertise_ids[]" value="{{ $expertise->id }}" class="sr-only" @checked(in_array($expertise->id, $selectedExpertise))>
+                                        <span class="inline-flex items-center gap-1.5 rounded-lg border border-gray-200 px-3.5 py-2 text-sm text-gray-600 transition group-has-[:checked]:border-cosmic-600 group-has-[:checked]:bg-cosmic-600 group-has-[:checked]:text-white">
+                                            <svg class="hidden h-3.5 w-3.5 group-has-[:checked]:block" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>
+                                            {{ $expertise->name }}
+                                        </span>
                                     </label>
                                 @endforeach
                             </div>
                         </div>
 
                         <div>
-                            <span class="mb-1.5 block text-sm font-medium text-gray-700">Languages <span class="text-red-500">*</span></span>
+                            <div class="mb-1.5 flex items-baseline gap-2">
+                                <span class="text-sm font-medium text-gray-700">Languages <span class="text-red-500">*</span></span>
+                                <span class="text-xs text-gray-400">Select all that apply</span>
+                            </div>
                             <div class="flex flex-wrap gap-2">
                                 @php($selectedLanguages = old('language_ids', []))
                                 @foreach($languages as $language)
-                                    <label class="cursor-pointer">
-                                        <input type="checkbox" name="language_ids[]" value="{{ $language->id }}" class="peer sr-only" @checked(in_array($language->id, $selectedLanguages))>
-                                        <span class="inline-block rounded-lg border border-gray-200 px-3 py-1.5 text-sm text-gray-600 peer-checked:border-cosmic-500 peer-checked:bg-cosmic-50 peer-checked:text-cosmic-700">{{ $language->name }}</span>
+                                    <label class="group cursor-pointer">
+                                        <input type="checkbox" name="language_ids[]" value="{{ $language->id }}" class="sr-only" @checked(in_array($language->id, $selectedLanguages))>
+                                        <span class="inline-flex items-center gap-1.5 rounded-lg border border-gray-200 px-3.5 py-2 text-sm text-gray-600 transition group-has-[:checked]:border-cosmic-600 group-has-[:checked]:bg-cosmic-600 group-has-[:checked]:text-white">
+                                            <svg class="hidden h-3.5 w-3.5 group-has-[:checked]:block" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>
+                                            {{ $language->name }}
+                                        </span>
                                     </label>
                                 @endforeach
                             </div>
@@ -211,16 +228,16 @@
 
                     {{-- Navigation --}}
                     <div class="mt-6 flex items-center justify-between gap-3 border-t border-gray-100 pt-5">
-                        <button type="button" x-show="step > 1" @click="step--" class="rounded-xl px-4 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-100">&larr; Back</button>
+                        <button type="button" x-show="step > 1" @click="step--" class="shrink-0 rounded-xl px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-100">&larr; Back</button>
                         <span x-show="step === 1"></span>
 
                         <button type="button" x-show="step < 4" @click="step++"
-                                class="ml-auto rounded-xl bg-cosmic-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-cosmic-600/25 transition hover:bg-cosmic-700">
+                                class="ml-auto rounded-xl bg-cosmic-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-cosmic-600/25 transition hover:bg-cosmic-700">
                             Continue &rarr;
                         </button>
 
                         <button type="submit" x-show="step === 4" :disabled="submitting"
-                                class="ml-auto rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 px-5 py-2.5 text-sm font-semibold text-night-950 shadow-lg shadow-gold-500/25 transition hover:from-gold-600 hover:to-gold-700 disabled:opacity-50">
+                                class="ml-auto rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 px-6 py-3 text-sm font-semibold text-night-950 shadow-lg shadow-gold-500/25 transition hover:from-gold-600 hover:to-gold-700 disabled:opacity-50">
                             <span x-show="!submitting">Submit application</span>
                             <span x-show="submitting">Submitting...</span>
                         </button>
@@ -229,6 +246,19 @@
             </form>
         </div>
     </div>
+
+    @push('styles')
+        <style>
+            /* Prevent iOS Safari from auto-zooming when focusing form fields (< 16px) */
+            @media (max-width: 640px) {
+                .signup-form input,
+                .signup-form select,
+                .signup-form textarea {
+                    font-size: 16px;
+                }
+            }
+        </style>
+    @endpush
 
     @push('scripts')
         <script>

@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
     {
         $this->createAdmin(
             'Super Admin',
-            'superadmin@astrokart.com',
+            'superadmin@diaspay.in',
             '9000000001',
             UserRole::SuperAdmin,
             (string) config('app.seed.super_admin_password'),
@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
 
         $this->createAdmin(
             'Admin User',
-            'admin@astrokart.com',
+            'admin@diaspay.in',
             '9000000002',
             UserRole::Admin,
             (string) config('app.seed.admin_password'),

@@ -27,7 +27,7 @@
                                pattern="[6-9][0-9]{9}"
                                autofocus
                                required
-                               class="block w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-cosmic-300/50 focus:border-cosmic-400 focus:outline-none focus:ring-2 focus:ring-cosmic-400/30">
+                               class="block w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-base text-white placeholder:text-cosmic-300/50 focus:border-cosmic-400 focus:outline-none focus:ring-2 focus:ring-cosmic-400/30 sm:text-sm">
                     </div>
                     @error('mobile')
                         <p class="mt-1.5 text-xs text-red-400">{{ $message }}</p>
