@@ -1,4 +1,4 @@
-<x-layouts.base :title="__('astrologer.application_title')">
+<x-layouts.base :title="__('astrologer.application_title')" :description="__('astrologer.og_description')">
     <div class="relative min-h-screen overflow-hidden bg-gradient-to-br from-night-950 via-night-900 to-cosmic-950 px-4 py-6 sm:py-10">
         <x-constellations class="opacity-50" />
         @php

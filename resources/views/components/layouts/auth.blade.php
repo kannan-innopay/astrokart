@@ -1,4 +1,4 @@
-<x-layouts.base :title="$title ?? 'Login'">
+<x-layouts.base :title="$title ?? 'Login'" :description="$description ?? null" :ogImage="$ogImage ?? null">
     <div class="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-night-950 via-night-900 to-cosmic-950 px-4 py-12">
         {{-- Animated constellations --}}
         <x-constellations class="opacity-60" />

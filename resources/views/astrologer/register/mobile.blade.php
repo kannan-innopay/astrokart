@@ -1,4 +1,4 @@
-<x-layouts.auth :title="__('astrologer.join_title')" :subtitle="__('astrologer.join_subtitle')">
+<x-layouts.auth :title="__('astrologer.join_title')" :subtitle="__('astrologer.join_subtitle')" :description="__('astrologer.og_description')">
     <div class="mb-4 flex justify-center">
         <x-locale-switcher align="left" />
     </div>
