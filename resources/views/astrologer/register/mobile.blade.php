@@ -1,4 +1,8 @@
-<x-layouts.auth title="Join as an Astrologer" subtitle="Verify your mobile number to begin your application">
+<x-layouts.auth :title="__('astrologer.join_title')" :subtitle="__('astrologer.join_subtitle')">
+    <div class="mb-4 flex justify-center">
+        <x-locale-switcher align="left" />
+    </div>
+
     <div x-data="{
         step: '{{ session('otp_sent') ? 'verify' : 'mobile' }}',
         mobile: '{{ old('mobile', '') }}',
@@ -13,7 +17,7 @@
 
             <div class="space-y-5">
                 <div>
-                    <label for="mobile" class="mb-1.5 block text-sm font-medium text-cosmic-100">Mobile Number</label>
+                    <label for="mobile" class="mb-1.5 block text-sm font-medium text-cosmic-100">{{ __('astrologer.mobile_label') }}</label>
                     <div class="flex items-center gap-2">
                         <span class="rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-cosmic-200">+91</span>
                         <input type="tel"
@@ -21,7 +25,7 @@
                                id="mobile"
                                x-model="mobile"
                                value="{{ old('mobile') }}"
-                               placeholder="Enter 10-digit mobile"
+                               placeholder="{{ __('astrologer.mobile_placeholder') }}"
                                maxlength="10"
                                inputmode="numeric"
                                pattern="[6-9][0-9]{9}"
@@ -37,10 +41,10 @@
                 <button type="submit"
                         :disabled="loading || mobile.length < 10"
                         class="w-full rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 px-5 py-3 text-sm font-semibold text-night-950 shadow-lg shadow-gold-500/25 transition hover:from-gold-600 hover:to-gold-700 disabled:opacity-50">
-                    <span x-show="!loading">Send OTP</span>
+                    <span x-show="!loading">{{ __('astrologer.send_otp') }}</span>
                     <span x-show="loading" class="flex items-center justify-center gap-2">
                         <svg class="h-4 w-4 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
-                        Sending...
+                        {{ __('astrologer.sending') }}
                     </span>
                 </button>
             </div>
@@ -58,15 +62,15 @@
             <div class="space-y-5">
                 <div class="text-center">
                     <p class="text-sm text-cosmic-200">
-                        OTP sent to <span class="font-semibold text-white" x-text="'+91 ' + mobile"></span>
+                        {{ __('astrologer.otp_sent_to') }} <span class="font-semibold text-white" x-text="'+91 ' + mobile"></span>
                     </p>
                     <button type="button" @click="step = 'mobile'; loading = false" class="mt-1 text-xs text-gold-400 hover:text-gold-300">
-                        Change number
+                        {{ __('astrologer.change_number') }}
                     </button>
                 </div>
 
                 <div>
-                    <label class="mb-2 block text-center text-sm font-medium text-cosmic-100">Enter OTP</label>
+                    <label class="mb-2 block text-center text-sm font-medium text-cosmic-100">{{ __('astrologer.enter_otp') }}</label>
                     <x-otp-input />
                     @error('otp')
                         <p class="mt-2 text-center text-xs text-red-400">{{ $message }}</p>
@@ -76,17 +80,17 @@
                 <button type="submit"
                         :disabled="loading"
                         class="w-full rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 px-5 py-3 text-sm font-semibold text-night-950 shadow-lg shadow-gold-500/25 transition hover:from-gold-600 hover:to-gold-700 disabled:opacity-50">
-                    <span x-show="!loading">Verify & Continue</span>
+                    <span x-show="!loading">{{ __('astrologer.verify_continue') }}</span>
                     <span x-show="loading" class="flex items-center justify-center gap-2">
                         <svg class="h-4 w-4 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
-                        Verifying...
+                        {{ __('astrologer.verifying') }}
                     </span>
                 </button>
             </div>
         </form>
 
         <p class="mt-6 text-center text-xs text-cosmic-300/60">
-            Looking for a reading? <a href="{{ route('login') }}" class="text-cosmic-300 hover:text-white">Login as a customer</a>
+            {{ __('astrologer.looking_for_reading') }} <a href="{{ route('login') }}" class="text-cosmic-300 hover:text-white">{{ __('astrologer.login_as_customer') }}</a>
         </p>
     </div>
 </x-layouts.auth>

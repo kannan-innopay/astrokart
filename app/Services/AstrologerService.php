@@ -75,7 +75,8 @@ class AstrologerService
                 'photo' => $photoPaths->first(),
                 'bio' => $data['bio'] ?? null,
                 'years_of_experience' => $data['years_of_experience'],
-                'price_per_minute' => $data['price_per_minute'],
+                // Signup form captures rupees; the rest of the money system is in paise.
+                'price_per_minute' => (int) $data['price_per_minute'] * 100,
                 'consultation_modes' => $data['consultation_modes'] ?? [ConsultationMode::Chat->value],
                 'status' => AstrologerStatus::Applied,
                 'bank_account_name' => $data['bank_account_name'] ?? null,

@@ -104,7 +104,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // --- Astrologer signup (public, available regardless of FEATURE_ASTROLOGERS) ---
-Route::prefix('astrologer/register')->name('astrologer.register.')->group(function () {
+Route::prefix('astrologer/register')->name('astrologer.register.')->middleware('setlocale')->group(function () {
     Route::get('/', [AstrologerRegistrationController::class, 'show'])->name('show');
     Route::post('otp/request', [AstrologerRegistrationController::class, 'requestOtp'])->name('otp.request');
     Route::post('otp/verify', [AstrologerRegistrationController::class, 'verifyOtp'])->name('otp.verify');

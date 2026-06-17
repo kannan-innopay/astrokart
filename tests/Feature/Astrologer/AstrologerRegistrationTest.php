@@ -93,6 +93,31 @@ test('registration works without any kyc (kyc is optional)', function () {
     expect($user->fresh()->astrologerProfile->documents)->toHaveCount(0);
 });
 
+test('price entered in rupees is stored in paise', function () {
+    Storage::fake('public');
+
+    $user = User::factory()->customer()->create();
+
+    $this->actingAs($user)
+        ->post(route('astrologer.register.store'), validRegistrationPayload(['price_per_minute' => 5]));
+
+    expect($user->fresh()->astrologerProfile->price_per_minute)->toBe(500);
+});
+
+test('the signup pages can be localized via the lang query parameter', function () {
+    // Guest mobile/OTP step in Hindi
+    $this->get(route('astrologer.register.show', ['lang' => 'hi']))
+        ->assertOk()
+        ->assertSee('ज्योतिषी के रूप में जुड़ें');
+
+    // Authenticated profile wizard in Tamil
+    $user = User::factory()->customer()->create();
+    $this->actingAs($user)
+        ->get(route('astrologer.register.profile', ['lang' => 'ta']))
+        ->assertOk()
+        ->assertSee('ஜோதிடர் விண்ணப்பம்');
+});
+
 test('at least one profile photo is required', function () {
     $user = User::factory()->customer()->create();
 
