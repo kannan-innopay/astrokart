@@ -1,5 +1,6 @@
 <x-layouts.base :title="__('astrologer.application_title')">
-    <div class="min-h-screen bg-gradient-to-br from-night-950 via-night-900 to-cosmic-950 px-4 py-6 sm:py-10">
+    <div class="relative min-h-screen overflow-hidden bg-gradient-to-br from-night-950 via-night-900 to-cosmic-950 px-4 py-6 sm:py-10">
+        <x-constellations class="opacity-50" />
         @php
             $stepFields = [
                 1 => ['name', 'bio', 'years_of_experience', 'price_per_minute', 'consultation_modes', 'expertise_ids', 'language_ids'],
@@ -18,7 +19,7 @@
             }
         @endphp
 
-        <div class="mx-auto w-full max-w-2xl animate-fade-up">
+        <div class="relative z-10 mx-auto w-full max-w-2xl animate-fade-up">
             <div class="mb-6">
                 <div class="mb-3 flex justify-end">
                     <x-locale-switcher />
@@ -50,9 +51,9 @@
                 @csrf
 
                 {{-- Progress --}}
-                <div class="mb-2 flex items-center justify-between gap-2">
+                <div class="mb-2 flex items-center justify-center gap-4 sm:gap-6">
                     <template x-for="(label, i) in steps" :key="i">
-                        <div class="flex flex-1 items-center gap-2">
+                        <div class="flex items-center gap-2">
                             <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold transition"
                                   :class="step >= i + 1 ? 'bg-gold-500 text-night-950' : 'bg-white/10 text-cosmic-300'"
                                   x-text="i + 1"></span>

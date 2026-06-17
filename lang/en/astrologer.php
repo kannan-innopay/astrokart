@@ -70,8 +70,8 @@ return [
     // Step 4 — settlement
     'settlement_details' => 'Settlement details',
     'settlement_help' => 'Where we send your consultation earnings. You can also add these later from your dashboard.',
-    'account_holder' => 'Account holder name',
-    'account_number' => 'Account number',
+    'account_holder' => 'Bank Account holder name',
+    'account_number' => 'Bank Account number',
     'ifsc' => 'IFSC code',
     'upi' => 'UPI ID',
 

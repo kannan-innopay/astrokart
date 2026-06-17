@@ -70,8 +70,8 @@ return [
     // Step 4 — settlement
     'settlement_details' => 'చెల్లింపు వివరాలు',
     'settlement_help' => 'మీ సంప్రదింపు ఆదాయాన్ని మేము పంపే చోటు. వీటిని తర్వాత మీ డ్యాష్‌బోర్డ్ నుండి కూడా జోడించవచ్చు.',
-    'account_holder' => 'ఖాతాదారు పేరు',
-    'account_number' => 'ఖాతా సంఖ్య',
+    'account_holder' => 'బ్యాంక్ ఖాతాదారు పేరు',
+    'account_number' => 'బ్యాంక్ ఖాతా సంఖ్య',
     'ifsc' => 'IFSC కోడ్',
     'upi' => 'UPI ఐడీ',
 

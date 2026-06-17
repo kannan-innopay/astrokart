@@ -70,8 +70,8 @@ return [
     // Step 4 — settlement
     'settlement_details' => 'सेटलमेंट तपशील',
     'settlement_help' => 'जिथे आम्ही तुमची सल्ला कमाई पाठवतो. हे तुम्ही नंतर तुमच्या डॅशबोर्डवरूनही जोडू शकता.',
-    'account_holder' => 'खातेधारकाचे नाव',
-    'account_number' => 'खाते क्रमांक',
+    'account_holder' => 'बँक खातेधारकाचे नाव',
+    'account_number' => 'बँक खाते क्रमांक',
     'ifsc' => 'IFSC कोड',
     'upi' => 'UPI आयडी',
 
