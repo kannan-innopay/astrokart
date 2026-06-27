@@ -69,7 +69,7 @@ class RegistrationController extends Controller
         }
 
         if ($request->user()->astrologerProfile) {
-            return redirect()->route('astrologer.register.status');
+            return $this->redirectForUser($request);
         }
 
         return view('astrologer.register.profile', [
@@ -85,7 +85,7 @@ class RegistrationController extends Controller
         }
 
         if ($request->user()->astrologerProfile) {
-            return redirect()->route('astrologer.register.status');
+            return $this->redirectForUser($request);
         }
 
         $this->astrologerService->register($request->user(), $request->validated());
@@ -112,11 +112,19 @@ class RegistrationController extends Controller
 
     private function redirectForUser(Request $request): RedirectResponse
     {
-        if ($request->user()->astrologerProfile) {
-            return redirect()->route('astrologer.register.status');
+        $astrologer = $request->user()->astrologerProfile;
+
+        if (! $astrologer) {
+            return redirect()->route('astrologer.register.profile');
         }
 
-        return redirect()->route('astrologer.register.profile');
+        // Approved astrologers go straight to their dashboard; everyone else
+        // (pending / rejected / suspended) sees their application status.
+        if ($astrologer->isApproved()) {
+            return redirect()->route('astrologer.dashboard');
+        }
+
+        return redirect()->route('astrologer.register.status');
     }
 
     /**

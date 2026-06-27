@@ -116,8 +116,13 @@ Route::prefix('astrologer/register')->name('astrologer.register.')->middleware('
     });
 });
 
+// Astrologer login — same OTP screen as registration; detects returning astrologers.
+Route::get('astrologer/login', [AstrologerRegistrationController::class, 'show'])
+    ->middleware('setlocale')
+    ->name('astrologer.login');
+
 // --- Astrologer (/astrologer) ---
-Route::prefix('astrologer')->name('astrologer.')->middleware(['auth', 'role:astrologer'])->group(function () {
+Route::prefix('astrologer')->name('astrologer.')->middleware(['auth', 'role:astrologer', 'astrologer.profile'])->group(function () {
     Route::get('dashboard', [AstrologerDashboardController::class, 'index'])->name('dashboard');
     Route::get('profile', [AstrologerProfileController::class, 'edit'])->name('profile.edit');
     Route::put('profile', [AstrologerProfileController::class, 'update'])->name('profile.update');
@@ -136,6 +141,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin,super_ad
     Route::get('users', [UserManagementController::class, 'index'])->name('users.index');
     Route::get('users/{user}', [UserManagementController::class, 'show'])->name('users.show');
     Route::patch('users/{user}/status', [UserManagementController::class, 'updateStatus'])->name('users.update-status');
+    Route::delete('users/{user}', [UserManagementController::class, 'destroy'])->name('users.destroy');
 
     Route::get('astrologers', [AdminAstrologerController::class, 'index'])->name('astrologers.index');
     Route::get('astrologers/{astrologer}', [AdminAstrologerController::class, 'show'])->name('astrologers.show');

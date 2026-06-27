@@ -24,6 +24,7 @@
                         @endif
                         <li><a href="{{ route('home') }}" class="transition hover:text-gold-400">Home</a></li>
                         <li><a href="{{ route('astrologer.register.show') }}" class="transition hover:text-gold-400">Become an Astrologer</a></li>
+                        <li><a href="{{ route('astrologer.login') }}" class="transition hover:text-gold-400">Astrologer Login</a></li>
                     </ul>
                 </div>
                 <div>

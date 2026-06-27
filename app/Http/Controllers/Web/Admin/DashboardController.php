@@ -13,7 +13,7 @@ class DashboardController extends Controller
     public function index(): View
     {
         return view('admin.dashboard', [
-            'totalUsers' => User::count(),
+            'totalUsers' => User::whereDoesntHave('astrologerProfile')->count(),
             'totalAstrologers' => Astrologer::count(),
             'pendingApprovals' => Astrologer::where('status', AstrologerStatus::Applied)->count(),
             'approvedAstrologers' => Astrologer::where('status', AstrologerStatus::Approved)->count(),

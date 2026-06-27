@@ -30,7 +30,14 @@
                                 <div>{{ $user->mobile }}</div>
                                 <div class="text-xs text-gray-400">{{ $user->email }}</div>
                             </td>
-                            <td class="px-6 py-3"><x-badge color="cosmic">{{ $user->role->value }}</x-badge></td>
+                            <td class="px-6 py-3">
+                                <div class="flex flex-wrap items-center gap-1.5">
+                                    <x-badge color="cosmic">{{ $user->role->value }}</x-badge>
+                                    @if($user->isAstrologer())
+                                        <x-badge color="yellow" :dot="true">Incomplete application</x-badge>
+                                    @endif
+                                </div>
+                            </td>
                             <td class="px-6 py-3">
                                 <x-badge :color="$user->account_status->value === 'active' ? 'green' : 'red'" :dot="true">
                                     {{ $user->account_status->value }}
@@ -38,7 +45,17 @@
                             </td>
                             <td class="px-6 py-3 text-gray-500">{{ $user->created_at->format('M d, Y') }}</td>
                             <td class="px-6 py-3">
-                                <a href="{{ route('admin.users.show', $user) }}" class="text-sm font-medium text-cosmic-600 hover:text-cosmic-800">View</a>
+                                <div class="flex items-center gap-3">
+                                    <a href="{{ route('admin.users.show', $user) }}" class="text-sm font-medium text-cosmic-600 hover:text-cosmic-800">View</a>
+                                    @if($user->isAstrologer())
+                                        <form method="POST" action="{{ route('admin.users.destroy', $user) }}"
+                                              onsubmit="return confirm('Delete this incomplete astrologer signup? This cannot be undone.')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-sm font-medium text-red-600 hover:text-red-800">Delete</button>
+                                        </form>
+                                    @endif
+                                </div>
                             </td>
                         </tr>
                     @empty

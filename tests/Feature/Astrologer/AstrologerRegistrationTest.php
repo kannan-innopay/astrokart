@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\UserRole;
+use App\Models\Astrologer;
 use App\Models\Expertise;
 use App\Models\Language;
 use App\Models\OtpVerification;
@@ -157,6 +158,36 @@ test('a new number signing up as an astrologer is created with the astrologer ro
     $this->post(route('astrologer.register.otp.verify'), ['mobile' => '9811111111', 'otp' => '123456']);
 
     expect(User::where('mobile', '9811111111')->value('role'))->toBe(UserRole::Astrologer);
+});
+
+test('an approved astrologer logging in is sent to the dashboard', function () {
+    $astrologer = Astrologer::factory()->approved()->create();
+    OtpVerification::create([
+        'mobile' => $astrologer->user->mobile,
+        'otp_hash' => Hash::make('123456'),
+        'purpose' => 'login',
+        'expires_at' => now()->addMinutes(10),
+    ]);
+
+    $this->post(route('astrologer.register.otp.verify'), ['mobile' => $astrologer->user->mobile, 'otp' => '123456'])
+        ->assertRedirect(route('astrologer.dashboard'));
+});
+
+test('a pending astrologer logging in is sent to the status page', function () {
+    $astrologer = Astrologer::factory()->create(); // status: applied
+    OtpVerification::create([
+        'mobile' => $astrologer->user->mobile,
+        'otp_hash' => Hash::make('123456'),
+        'purpose' => 'login',
+        'expires_at' => now()->addMinutes(10),
+    ]);
+
+    $this->post(route('astrologer.register.otp.verify'), ['mobile' => $astrologer->user->mobile, 'otp' => '123456'])
+        ->assertRedirect(route('astrologer.register.status'));
+});
+
+test('the astrologer login route renders the otp screen', function () {
+    $this->get(route('astrologer.login'))->assertOk();
 });
 
 test('a number registered as a customer cannot sign up as an astrologer', function () {

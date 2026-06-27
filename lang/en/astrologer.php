@@ -4,7 +4,7 @@ return [
     // Mobile / OTP step
     'og_description' => 'Join Astrokart as a Vedic astrologer — consult clients online via chat, call or video, set your own per-minute rates and schedule, get a verified badge, and grow your practice. Sign up in minutes.',
     'join_title' => 'Join as an Astrologer',
-    'join_subtitle' => 'Verify your mobile number to begin your application',
+    'join_subtitle' => 'Log in or start your astrologer application',
     'mobile_label' => 'Mobile Number',
     'mobile_placeholder' => 'Enter 10-digit mobile',
     'send_otp' => 'Send OTP',
