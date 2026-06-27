@@ -6,12 +6,14 @@ use App\Concerns\HasUuid;
 use App\Enums\AstrologerStatus;
 use Database\Factories\AstrologerFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\Storage;
 
 #[Fillable([
     'user_id',
@@ -48,6 +50,17 @@ class Astrologer extends Model
             'total_reviews' => 'integer',
             'verified_at' => 'datetime',
         ];
+    }
+
+    /**
+     * Public URL for the primary profile photo (the `photo` column stores a
+     * path relative to the public disk).
+     *
+     * @return Attribute<?string, never>
+     */
+    protected function photoUrl(): Attribute
+    {
+        return Attribute::get(fn (): ?string => $this->photo ? Storage::disk('public')->url($this->photo) : null);
     }
 
     public function user(): BelongsTo

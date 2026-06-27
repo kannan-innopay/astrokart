@@ -7,8 +7,8 @@
         <div class="flex items-start gap-4">
             {{-- Avatar --}}
             <div class="relative shrink-0">
-                @if($astrologer->photo)
-                    <img src="{{ $astrologer->photo }}" alt="{{ $astrologer->user->name }}" class="h-14 w-14 rounded-xl object-cover">
+                @if($astrologer->photo_url)
+                    <img src="{{ $astrologer->photo_url }}" alt="{{ $astrologer->user->name }}" class="h-14 w-14 rounded-xl object-cover">
                 @else
                     <div class="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-cosmic-400 to-cosmic-600 text-lg font-bold text-white">
                         {{ substr($astrologer->user->name, 0, 1) }}

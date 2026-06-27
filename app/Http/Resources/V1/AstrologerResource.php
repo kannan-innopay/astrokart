@@ -15,7 +15,7 @@ class AstrologerResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->user->name,
-            'photo' => $this->photo,
+            'photo' => $this->photo_url,
             'bio' => $this->bio,
             'years_of_experience' => $this->years_of_experience,
             'price_per_minute' => $this->price_per_minute,

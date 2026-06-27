@@ -9,8 +9,8 @@
             {{-- Avatar: centered on mobile, left-aligned on desktop --}}
             <div class="flex flex-col items-center sm:flex-row sm:items-start sm:gap-6">
                 <div class="relative shrink-0 mb-4 sm:mb-0">
-                    @if($astrologer->photo)
-                        <img src="{{ $astrologer->photo }}" alt="{{ $astrologer->user->name }}" class="h-24 w-24 rounded-full object-cover ring-4 ring-white shadow-lg sm:h-28 sm:w-28 sm:rounded-2xl">
+                    @if($astrologer->photo_url)
+                        <img src="{{ $astrologer->photo_url }}" alt="{{ $astrologer->user->name }}" class="h-24 w-24 rounded-full object-cover ring-4 ring-white shadow-lg sm:h-28 sm:w-28 sm:rounded-2xl">
                     @else
                         <div class="flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-cosmic-400 to-cosmic-600 text-3xl font-bold text-white ring-4 ring-white shadow-lg sm:h-28 sm:w-28 sm:rounded-2xl">
                             {{ substr($astrologer->user->name, 0, 1) }}
