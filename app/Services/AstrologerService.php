@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 
 class AstrologerService
@@ -134,6 +135,32 @@ class AstrologerService
                 'document_number' => $numberKey ? ($data[$numberKey] ?? null) : null,
                 'file_path' => $file->store('astrologer-documents', 'local'),
             ]);
+        }
+    }
+
+    /**
+     * Remove an astrologer's uploaded files (profile photos on the public disk,
+     * KYC documents on the private disk). Call before deleting the record, since
+     * DB cascades do not fire model events.
+     */
+    public function purgeFiles(Astrologer $astrologer): void
+    {
+        $astrologer->loadMissing(['photos', 'documents']);
+
+        $publicPaths = $astrologer->photos->pluck('file_path')
+            ->push($astrologer->photo)
+            ->filter()
+            ->unique()
+            ->all();
+
+        if ($publicPaths !== []) {
+            Storage::disk('public')->delete($publicPaths);
+        }
+
+        $privatePaths = $astrologer->documents->pluck('file_path')->filter()->unique()->all();
+
+        if ($privatePaths !== []) {
+            Storage::disk('local')->delete($privatePaths);
         }
     }
 

@@ -146,13 +146,18 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin,super_ad
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
 
     Route::get('users', [UserManagementController::class, 'index'])->name('users.index');
+    Route::get('users/{user}/edit', [UserManagementController::class, 'edit'])->name('users.edit');
     Route::get('users/{user}', [UserManagementController::class, 'show'])->name('users.show');
+    Route::put('users/{user}', [UserManagementController::class, 'update'])->name('users.update');
     Route::patch('users/{user}/status', [UserManagementController::class, 'updateStatus'])->name('users.update-status');
     Route::delete('users/{user}', [UserManagementController::class, 'destroy'])->name('users.destroy');
 
     Route::get('astrologers', [AdminAstrologerController::class, 'index'])->name('astrologers.index');
+    Route::get('astrologers/{astrologer}/edit', [AdminAstrologerController::class, 'edit'])->name('astrologers.edit');
     Route::get('astrologers/{astrologer}', [AdminAstrologerController::class, 'show'])->name('astrologers.show');
+    Route::put('astrologers/{astrologer}', [AdminAstrologerController::class, 'update'])->name('astrologers.update');
     Route::patch('astrologers/{astrologer}/status', [AdminAstrologerController::class, 'updateStatus'])->name('astrologers.update-status');
+    Route::delete('astrologers/{astrologer}', [AdminAstrologerController::class, 'destroy'])->name('astrologers.destroy');
     Route::get('astrologer-documents/{document}/download', [AdminAstrologerController::class, 'downloadDocument'])->name('astrologer-documents.download');
 
     Route::get('sales', [SalesManagementController::class, 'index'])->name('sales.index');

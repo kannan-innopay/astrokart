@@ -4,6 +4,22 @@
         <span class="ml-2">{{ $user->name }}</span>
     </x-slot:header>
 
+    @php($actor = auth()->user())
+    @php($canManage = ! $user->isAdmin() || $actor->isSuperAdmin())
+    <div class="mb-6 flex items-center gap-3">
+        @if($canManage)
+            <x-button href="{{ route('admin.users.edit', $user) }}" variant="secondary" size="sm">Edit</x-button>
+        @endif
+        @if($canManage && ! $user->is($actor))
+            <form method="POST" action="{{ route('admin.users.destroy', $user) }}"
+                  onsubmit="return confirm('Delete this user and all their data? This cannot be undone.')">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="rounded-xl bg-red-50 px-3.5 py-1.5 text-xs font-medium text-red-700 transition hover:bg-red-100">Delete user</button>
+            </form>
+        @endif
+    </div>
+
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <x-card title="User Information">
             <dl class="space-y-3 text-sm">

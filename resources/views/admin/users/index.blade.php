@@ -47,6 +47,9 @@
                             <td class="px-6 py-3">
                                 <div class="flex items-center gap-3">
                                     <a href="{{ route('admin.users.show', $user) }}" class="text-sm font-medium text-cosmic-600 hover:text-cosmic-800">View</a>
+                                    @if(! $user->isAdmin() || auth()->user()->isSuperAdmin())
+                                        <a href="{{ route('admin.users.edit', $user) }}" class="text-sm font-medium text-gray-500 hover:text-gray-800">Edit</a>
+                                    @endif
                                     @if($user->isAstrologer())
                                         <form method="POST" action="{{ route('admin.users.destroy', $user) }}"
                                               onsubmit="return confirm('Delete this incomplete astrologer signup? This cannot be undone.')">

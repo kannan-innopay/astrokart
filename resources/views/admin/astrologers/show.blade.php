@@ -4,6 +4,16 @@
         <span class="ml-2">{{ $astrologer->user->name }}</span>
     </x-slot:header>
 
+    <div class="mb-6 flex items-center gap-3">
+        <x-button href="{{ route('admin.astrologers.edit', $astrologer) }}" variant="secondary" size="sm">Edit</x-button>
+        <form method="POST" action="{{ route('admin.astrologers.destroy', $astrologer) }}"
+              onsubmit="return confirm('Delete this astrologer and their account? This cannot be undone.')">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="rounded-xl bg-red-50 px-3.5 py-1.5 text-xs font-medium text-red-700 transition hover:bg-red-100">Delete astrologer</button>
+        </form>
+    </div>
+
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <div class="lg:col-span-2 space-y-6">
             <x-card title="Profile">
