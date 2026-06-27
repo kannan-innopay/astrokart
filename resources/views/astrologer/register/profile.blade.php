@@ -129,6 +129,19 @@
                                 @endforeach
                             </div>
                         </div>
+
+                        @if($salesUsers->isNotEmpty())
+                            <div>
+                                <div class="mb-1.5 flex items-baseline gap-2">
+                                    <span class="text-sm font-medium text-gray-700">{{ __('astrologer.referred_by') }}</span>
+                                    <span class="text-xs text-gray-400">{{ __('astrologer.optional') }}</span>
+                                </div>
+                                <x-select name="sales_user_id"
+                                          :options="$salesUsers->pluck('name', 'id')->toArray()"
+                                          :selected="old('sales_user_id')"
+                                          :placeholder="__('astrologer.referred_by_placeholder')" />
+                            </div>
+                        @endif
                     </div>
 
                     {{-- Step 2: Photos --}}

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Concerns\HasUuid;
 use App\Enums\AccountStatus;
 use App\Enums\Gender;
+use App\Enums\SubscriptionStatus;
 use App\Enums\UserRole;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -69,6 +70,14 @@ class User extends Authenticatable
         return $this->hasMany(Consultation::class);
     }
 
+    /**
+     * Astrologers this sales user helped onboard.
+     */
+    public function referredAstrologers(): HasMany
+    {
+        return $this->hasMany(Astrologer::class, 'sales_user_id');
+    }
+
     public function walletTransactions(): HasMany
     {
         return $this->hasMany(WalletTransaction::class);
@@ -82,7 +91,7 @@ class User extends Authenticatable
     public function activeSubscription(): HasOne
     {
         return $this->hasOne(Subscription::class)
-            ->where('status', \App\Enums\SubscriptionStatus::Active)
+            ->where('status', SubscriptionStatus::Active)
             ->where('expires_at', '>', now())
             ->latest('starts_at');
     }
@@ -118,6 +127,11 @@ class User extends Authenticatable
     public function isCustomer(): bool
     {
         return $this->role === UserRole::Customer;
+    }
+
+    public function isSales(): bool
+    {
+        return $this->role === UserRole::Sales;
     }
 
     public function isSuperAdmin(): bool

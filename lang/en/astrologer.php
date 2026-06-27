@@ -47,6 +47,9 @@ return [
     'languages_label' => 'Languages',
     'select_all' => 'Select all that apply',
 
+    'referred_by' => 'Referred by (sales)',
+    'referred_by_placeholder' => 'Select a sales person',
+
     // Step 2 — photos
     'profile_photos' => 'Profile photos',
     'photos_help' => 'Add at least one clear photo. The first one becomes your primary profile picture. You can add up to :max.',

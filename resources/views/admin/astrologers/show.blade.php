@@ -14,6 +14,9 @@
                     <div class="flex justify-between"><dt class="text-gray-500">Price</dt><dd class="text-gray-900">₹{{ number_format($astrologer->price_per_minute / 100) }}/min</dd></div>
                     <div class="flex justify-between"><dt class="text-gray-500">Rating</dt><dd class="text-gray-900">{{ number_format($astrologer->rating, 1) }} ({{ $astrologer->total_reviews }} reviews)</dd></div>
                     <div class="flex justify-between"><dt class="text-gray-500">Online</dt><dd><x-badge :color="$astrologer->is_online ? 'green' : 'gray'" :dot="true">{{ $astrologer->is_online ? 'Yes' : 'No' }}</x-badge></dd></div>
+                    @if($astrologer->salesUser)
+                        <div class="flex justify-between"><dt class="text-gray-500">Referred by (sales)</dt><dd class="font-medium text-gray-900">{{ $astrologer->salesUser->name }}</dd></div>
+                    @endif
                 </dl>
 
                 @if($astrologer->bio)

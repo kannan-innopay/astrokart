@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Storage;
 
 #[Fillable([
     'user_id',
+    'sales_user_id',
     'photo',
     'bio',
     'years_of_experience',
@@ -66,6 +67,11 @@ class Astrologer extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function salesUser(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'sales_user_id');
     }
 
     public function expertises(): BelongsToMany

@@ -106,6 +106,29 @@ test('price entered in rupees is stored in paise', function () {
     expect($user->fresh()->astrologerProfile->price_per_minute)->toBe(500);
 });
 
+test('an astrologer can be attributed to a sales person at signup', function () {
+    Storage::fake('public');
+
+    $sales = User::factory()->sales()->create();
+    $user = User::factory()->astrologer()->create();
+
+    $this->actingAs($user)
+        ->post(route('astrologer.register.store'), validRegistrationPayload(['sales_user_id' => $sales->id]));
+
+    expect($user->fresh()->astrologerProfile->sales_user_id)->toBe($sales->id);
+});
+
+test('a non-sales user cannot be set as the referring sales person', function () {
+    Storage::fake('public');
+
+    $customer = User::factory()->customer()->create();
+    $user = User::factory()->astrologer()->create();
+
+    $this->actingAs($user)
+        ->post(route('astrologer.register.store'), validRegistrationPayload(['sales_user_id' => $customer->id]))
+        ->assertSessionHasErrors('sales_user_id');
+});
+
 test('the signup pages can be localized via the lang query parameter', function () {
     // Guest mobile/OTP step in Hindi
     $this->get(route('astrologer.register.show', ['lang' => 'hi']))

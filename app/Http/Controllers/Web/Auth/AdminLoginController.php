@@ -29,16 +29,22 @@ class AdminLoginController extends Controller
             $request->validated('password'),
         );
 
-        if (! $user->isAdmin()) {
+        $destination = match (true) {
+            $user->isAdmin() => 'admin.dashboard',
+            $user->isSales() => 'sales.dashboard',
+            default => null,
+        };
+
+        if ($destination === null) {
             throw ValidationException::withMessages([
-                'email' => ['This account does not have admin access.'],
+                'email' => ['This account does not have staff access.'],
             ]);
         }
 
         Auth::login($user, remember: true);
         $request->session()->regenerate();
 
-        return redirect()->route('admin.dashboard');
+        return redirect()->route($destination);
     }
 
     public function logout(Request $request): RedirectResponse

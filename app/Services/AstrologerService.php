@@ -79,6 +79,7 @@ class AstrologerService
 
             $astrologer = Astrologer::create([
                 'user_id' => $user->id,
+                'sales_user_id' => $data['sales_user_id'] ?? null,
                 'photo' => $photoPaths->first(),
                 'bio' => $data['bio'] ?? null,
                 'years_of_experience' => $data['years_of_experience'],

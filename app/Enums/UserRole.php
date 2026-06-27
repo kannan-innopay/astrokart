@@ -6,6 +6,7 @@ enum UserRole: string
 {
     case Customer = 'customer';
     case Astrologer = 'astrologer';
+    case Sales = 'sales';
     case Admin = 'admin';
     case SupportAgent = 'support_agent';
     case FinanceAdmin = 'finance_admin';

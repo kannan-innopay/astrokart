@@ -36,7 +36,7 @@ class AstrologerManagementController extends Controller
     public function show(Astrologer $astrologer): View
     {
         return view('admin.astrologers.show', [
-            'astrologer' => $astrologer->load(['user', 'expertises', 'languages', 'documents', 'photos', 'availabilities']),
+            'astrologer' => $astrologer->load(['user', 'salesUser', 'expertises', 'languages', 'documents', 'photos', 'availabilities']),
         ]);
     }
 

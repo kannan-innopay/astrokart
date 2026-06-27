@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Astrologer;
 
 use App\Enums\ConsultationMode;
+use App\Enums\UserRole;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -30,6 +31,9 @@ class RegisterAstrologerRequest extends FormRequest
             'expertise_ids.*' => ['integer', 'exists:expertises,id'],
             'language_ids' => ['required', 'array', 'min:1'],
             'language_ids.*' => ['integer', 'exists:languages,id'],
+
+            // Optional sales person who is helping them sign up
+            'sales_user_id' => ['nullable', 'integer', Rule::exists('users', 'id')->where('role', UserRole::Sales->value)],
 
             // Profile photos (at least one, multiple allowed)
             'photos' => ['required', 'array', 'min:1', 'max:6'],

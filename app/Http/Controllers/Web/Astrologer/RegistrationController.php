@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web\Astrologer;
 
+use App\Enums\AccountStatus;
 use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Astrologer\RegisterAstrologerRequest;
@@ -9,6 +10,7 @@ use App\Http\Requests\Auth\RequestOtpRequest;
 use App\Http\Requests\Auth\VerifyOtpRequest;
 use App\Models\Expertise;
 use App\Models\Language;
+use App\Models\User;
 use App\Services\AstrologerService;
 use App\Services\AuthService;
 use Illuminate\Http\RedirectResponse;
@@ -75,6 +77,10 @@ class RegistrationController extends Controller
         return view('astrologer.register.profile', [
             'expertises' => Expertise::where('is_active', true)->orderBy('name')->get(),
             'languages' => Language::orderBy('name')->get(),
+            'salesUsers' => User::where('role', UserRole::Sales)
+                ->where('account_status', AccountStatus::Active)
+                ->orderBy('name')
+                ->get(['id', 'name']),
         ]);
     }
 

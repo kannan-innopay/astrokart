@@ -4,6 +4,7 @@ use App\Http\Controllers\Web\Admin\AstrologerManagementController as AdminAstrol
 use App\Http\Controllers\Web\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Web\Admin\ExpertiseManagementController;
 use App\Http\Controllers\Web\Admin\LanguageManagementController;
+use App\Http\Controllers\Web\Admin\SalesManagementController;
 use App\Http\Controllers\Web\Admin\UserManagementController;
 use App\Http\Controllers\Web\Astrologer\AvailabilityController;
 use App\Http\Controllers\Web\Astrologer\ConsultationController as AstrologerConsultationController;
@@ -30,6 +31,7 @@ use App\Http\Controllers\Web\Customer\ProfileController;
 use App\Http\Controllers\Web\Customer\SubscriptionController;
 use App\Http\Controllers\Web\Customer\TransitController;
 use App\Http\Controllers\Web\Customer\WalletController;
+use App\Http\Controllers\Web\Sales\DashboardController as SalesDashboardController;
 use Illuminate\Support\Facades\Route;
 
 // --- Auth ---
@@ -134,6 +136,11 @@ Route::prefix('astrologer')->name('astrologer.')->middleware(['auth', 'role:astr
     Route::post('consultation/{consultation}/reject', [AstrologerConsultationController::class, 'reject'])->name('consultation.reject');
 });
 
+// --- Sales (/sales) ---
+Route::prefix('sales')->name('sales.')->middleware(['auth', 'role:sales'])->group(function () {
+    Route::get('dashboard', [SalesDashboardController::class, 'index'])->name('dashboard');
+});
+
 // --- Admin (/admin) ---
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin,super_admin'])->group(function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
@@ -147,6 +154,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin,super_ad
     Route::get('astrologers/{astrologer}', [AdminAstrologerController::class, 'show'])->name('astrologers.show');
     Route::patch('astrologers/{astrologer}/status', [AdminAstrologerController::class, 'updateStatus'])->name('astrologers.update-status');
     Route::get('astrologer-documents/{document}/download', [AdminAstrologerController::class, 'downloadDocument'])->name('astrologer-documents.download');
+
+    Route::get('sales', [SalesManagementController::class, 'index'])->name('sales.index');
+    Route::get('sales/create', [SalesManagementController::class, 'create'])->name('sales.create');
+    Route::post('sales', [SalesManagementController::class, 'store'])->name('sales.store');
+    Route::delete('sales/{user}', [SalesManagementController::class, 'destroy'])->name('sales.destroy');
 
     Route::resource('expertises', ExpertiseManagementController::class)->except(['show']);
     Route::resource('languages', LanguageManagementController::class)->except(['show']);
