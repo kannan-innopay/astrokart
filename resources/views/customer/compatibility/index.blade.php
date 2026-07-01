@@ -1,5 +1,4 @@
 <x-layouts.customer title="Compatibility Matching">
-    <div class="mx-auto max-w-5xl px-4 py-8 sm:px-6">
         <div class="text-center">
             <h1 class="font-display text-3xl font-bold text-gray-900">Compatibility Matching</h1>
             <p class="mt-2 text-gray-500">Ashtakoota compatibility analysis based on Moon nakshatra</p>
@@ -110,5 +109,4 @@
                 </div>
             @endif
         @endunless
-    </div>
 </x-layouts.customer>

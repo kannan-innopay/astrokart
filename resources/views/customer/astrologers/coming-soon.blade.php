@@ -1,4 +1,4 @@
-<x-layouts.customer title="Astrologers">
+<x-layouts.customer title="Astrologers" :container="false">
     <div class="mx-auto max-w-5xl px-4 py-16 text-center sm:px-6 sm:py-24">
         <div class="flex justify-center">
             <div class="flex h-20 w-20 items-center justify-center rounded-3xl bg-cosmic-100">

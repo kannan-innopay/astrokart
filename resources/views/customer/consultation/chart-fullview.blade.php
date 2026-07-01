@@ -1,4 +1,4 @@
-<x-layouts.customer title="Birth Chart — {{ $chartData['user_name'] ?? 'User' }}">
+<x-layouts.customer title="Birth Chart — {{ $chartData['user_name'] ?? 'User' }}" :container="false">
     @php
         $allLabels = [];
         $locales = ['en' => 'English', 'hi' => 'हिन्दी', 'ta' => 'தமிழ்', 'te' => 'తెలుగు', 'ml' => 'മലയാളം', 'mr' => 'मराठी', 'kn' => 'ಕನ್ನಡ'];

@@ -1,5 +1,4 @@
 <x-layouts.customer title="Monthly Forecast">
-    <div class="mx-auto max-w-5xl px-4 py-8 sm:px-6">
         <x-predictions-nav />
 
         <h1 class="font-display text-2xl font-bold text-gray-900">Monthly Forecast</h1>
@@ -134,5 +133,4 @@
                 <p class="text-gray-500">No forecast available for this month. Please try again later.</p>
             </x-card>
         @endif
-    </div>
 </x-layouts.customer>

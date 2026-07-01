@@ -1,5 +1,4 @@
 <x-layouts.customer title="Premium Plans">
-    <div class="mx-auto max-w-5xl px-4 py-8 sm:px-6">
         <div class="text-center">
             <h1 class="font-display text-3xl font-bold text-gray-900">Unlock Premium Insights</h1>
             <p class="mt-2 text-gray-500">Detailed analysis, daily predictions, and personalized guidance</p>
@@ -160,5 +159,4 @@
                 @endif
             </p>
         </div>
-    </div>
 </x-layouts.customer>

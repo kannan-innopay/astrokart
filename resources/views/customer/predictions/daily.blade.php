@@ -1,5 +1,4 @@
 <x-layouts.customer title="Daily Prediction">
-    <div class="mx-auto max-w-5xl px-4 py-8 sm:px-6">
         <x-predictions-nav />
 
         <h1 class="font-display text-2xl font-bold text-gray-900">Daily Prediction</h1>
@@ -157,5 +156,4 @@
                 <p class="text-gray-500">No prediction available for this date. Please try again later.</p>
             </x-card>
         @endif
-    </div>
 </x-layouts.customer>

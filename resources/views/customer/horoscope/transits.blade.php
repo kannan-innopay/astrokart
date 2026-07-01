@@ -1,5 +1,4 @@
 <x-layouts.customer title="Transits & Forecast">
-    <div class="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
 
         @php
             $availableLocales = ['en' => 'English', 'hi' => 'हिन्दी', 'ta' => 'தமிழ்', 'te' => 'తెలుగు', 'ml' => 'മലയാളം', 'mr' => 'मराठी', 'kn' => 'ಕನ್ನಡ'];
@@ -336,5 +335,4 @@
                 </x-card>
             @endauth
         </div>
-    </div>
 </x-layouts.customer>

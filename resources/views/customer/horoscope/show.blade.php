@@ -1,5 +1,4 @@
 <x-layouts.customer title="My Birth Chart">
-    <div class="mx-auto max-w-5xl px-3 py-5 sm:px-6 sm:py-8 lg:px-8">
         <div class="mb-4 sm:mb-6">
             <div class="flex items-start justify-between gap-2">
                 <h1 class="font-display text-xl font-bold text-gray-900 sm:text-2xl">My Birth Chart</h1>
@@ -356,5 +355,4 @@
                 </x-card>
             </div>
         @endif
-    </div>
 </x-layouts.customer>

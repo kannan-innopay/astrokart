@@ -1,4 +1,4 @@
-<x-layouts.customer title="Home">
+<x-layouts.customer title="Home" :container="false">
     @auth
         {{-- ============ AUTHENTICATED HOME ============ --}}
         <div class="mx-auto max-w-5xl px-3 py-5 sm:px-6 sm:py-8 lg:px-8 space-y-5 sm:space-y-6">

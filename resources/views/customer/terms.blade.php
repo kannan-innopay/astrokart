@@ -1,5 +1,4 @@
 <x-layouts.customer title="Terms of Service">
-    <div class="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
         <h1 class="font-display text-3xl font-bold text-gray-900">Terms of Service</h1>
         <p class="mt-2 text-sm text-gray-500">Last updated: 09 Jun 2026</p>
 
@@ -113,5 +112,4 @@
             </section>
 
         </div>
-    </div>
 </x-layouts.customer>

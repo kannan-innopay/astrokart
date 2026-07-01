@@ -1,4 +1,4 @@
-<x-layouts.customer title="Chat Consultation">
+<x-layouts.customer title="Chat Consultation" :container="false">
     @php
         $chatConfig = [
             'consultationId' => $consultation->id,

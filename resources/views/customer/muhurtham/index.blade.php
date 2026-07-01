@@ -1,5 +1,4 @@
 <x-layouts.customer title="Muhurtham Finder">
-    <div class="mx-auto max-w-5xl px-4 py-8 sm:px-6">
         <h1 class="font-display text-2xl font-bold text-gray-900">Muhurtham Finder</h1>
         <p class="mt-1 text-sm text-gray-500">Find auspicious dates for important events</p>
 
@@ -82,5 +81,4 @@
                 </div>
             </x-card>
         @endif
-    </div>
 </x-layouts.customer>
