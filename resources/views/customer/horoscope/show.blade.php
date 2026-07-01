@@ -55,6 +55,7 @@
                     'te' => 'తెలుగు',
                     'ml' => 'മലയാളം',
                     'mr' => 'मराठी',
+                    'kn' => 'ಕನ್ನಡ',
                 ];
 
                 // Build all locale label sets as JSON for Alpine

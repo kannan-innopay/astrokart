@@ -1,5 +1,5 @@
 <x-layouts.customer title="My Profile">
-    <div class="mx-auto max-w-2xl px-4 py-8 sm:px-6">
+    <div class="mx-auto max-w-5xl px-4 py-8 sm:px-6">
         <h1 class="font-display text-2xl font-bold text-gray-900">My Profile</h1>
 
         <x-card class="mt-6">

@@ -9,7 +9,7 @@ use Illuminate\View\View;
 
 class AnalysisController extends Controller
 {
-    private const VALID_LOCALES = ['en', 'hi', 'ta', 'te', 'ml', 'mr'];
+    private const VALID_LOCALES = ['en', 'hi', 'ta', 'te', 'ml', 'mr', 'kn'];
 
     public function __construct(
         private AnalysisService $analysisService,

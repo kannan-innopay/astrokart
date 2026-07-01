@@ -2,8 +2,8 @@
     'astrologer',
 ])
 
-<a href="{{ route('astrologers.show', $astrologer) }}" class="group block">
-    <div class="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm transition-all duration-200 group-hover:-translate-y-0.5 group-hover:shadow-lg group-hover:shadow-cosmic-100/50">
+<a href="{{ route('astrologers.show', $astrologer) }}" class="group flex h-full">
+    <div class="flex h-full w-full flex-col rounded-2xl border border-gray-100 bg-white p-5 shadow-sm transition-all duration-200 group-hover:-translate-y-0.5 group-hover:shadow-lg group-hover:shadow-cosmic-100/50">
         <div class="flex items-start gap-4">
             {{-- Avatar --}}
             <div class="relative shrink-0">
@@ -20,7 +20,7 @@
             </div>
 
             <div class="min-w-0 flex-1">
-                <h3 class="font-display text-base font-semibold text-gray-900 group-hover:text-cosmic-700">{{ $astrologer->user->name }}</h3>
+                <h3 class="line-clamp-1 font-display text-base font-semibold text-gray-900 group-hover:text-cosmic-700">{{ $astrologer->user->name }}</h3>
 
                 <div class="mt-1 flex items-center gap-2 text-xs text-gray-500">
                     <span class="flex items-center gap-0.5">
@@ -30,20 +30,18 @@
                     <span>&middot;</span>
                     <span>{{ $astrologer->years_of_experience }}y exp</span>
                 </div>
-
-                {{-- Expertise tags --}}
-                @if($astrologer->expertises->isNotEmpty())
-                    <div class="mt-2.5 flex flex-wrap gap-1">
-                        @foreach($astrologer->expertises->take(3) as $expertise)
-                            <span class="rounded-md bg-cosmic-50 px-2 py-0.5 text-[10px] font-medium text-cosmic-600">{{ $expertise->name }}</span>
-                        @endforeach
-                    </div>
-                @endif
             </div>
         </div>
 
-        {{-- Footer --}}
-        <div class="mt-4 flex items-center justify-between border-t border-gray-50 pt-3">
+        {{-- Expertise tags (fixed area for consistent alignment) --}}
+        <div class="mt-2.5 flex min-h-[1.5rem] flex-wrap gap-1">
+            @foreach($astrologer->expertises->take(3) as $expertise)
+                <span class="rounded-md bg-cosmic-50 px-2 py-0.5 text-[10px] font-medium text-cosmic-600">{{ $expertise->name }}</span>
+            @endforeach
+        </div>
+
+        {{-- Footer pinned to the bottom for equal-height cards --}}
+        <div class="mt-auto flex items-center justify-between border-t border-gray-50 pt-3">
             <div class="text-sm">
                 <span class="font-semibold text-gray-900">₹{{ number_format($astrologer->price_per_minute / 100) }}</span>
                 <span class="text-gray-400">/min</span>

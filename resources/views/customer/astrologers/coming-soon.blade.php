@@ -1,5 +1,5 @@
 <x-layouts.customer title="Astrologers">
-    <div class="mx-auto max-w-2xl px-4 py-16 text-center sm:px-6 sm:py-24">
+    <div class="mx-auto max-w-5xl px-4 py-16 text-center sm:px-6 sm:py-24">
         <div class="flex justify-center">
             <div class="flex h-20 w-20 items-center justify-center rounded-3xl bg-cosmic-100">
                 <svg class="h-10 w-10 text-cosmic-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">

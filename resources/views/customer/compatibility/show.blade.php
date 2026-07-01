@@ -1,5 +1,5 @@
 <x-layouts.customer title="Compatibility Report">
-    <div class="mx-auto max-w-3xl px-4 py-8 sm:px-6">
+    <div class="mx-auto max-w-5xl px-4 py-8 sm:px-6">
         {{-- Back link --}}
         <a href="{{ route('compatibility.index') }}" class="inline-flex items-center gap-1 text-sm font-medium text-cosmic-600 hover:text-cosmic-700">
             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>

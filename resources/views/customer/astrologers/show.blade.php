@@ -1,5 +1,5 @@
 <x-layouts.customer :title="$astrologer->user->name">
-    <div class="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
         <a href="{{ route('astrologers.index') }}" class="mb-6 inline-flex items-center gap-1 text-sm text-gray-500 hover:text-cosmic-600">
             <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>
             Back to listing

@@ -16,7 +16,7 @@ class HoraController extends Controller
     public function index(Request $request): View
     {
         $user = $request->user();
-        $validLocales = ['en', 'hi', 'ta', 'te', 'ml', 'mr'];
+        $validLocales = ['en', 'hi', 'ta', 'te', 'ml', 'mr', 'kn'];
         $locale = in_array($request->query('lang'), $validLocales)
             ? $request->query('lang')
             : ($user?->preferred_language ?? 'en');

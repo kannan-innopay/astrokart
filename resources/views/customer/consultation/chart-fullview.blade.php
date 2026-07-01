@@ -1,7 +1,7 @@
 <x-layouts.customer title="Birth Chart — {{ $chartData['user_name'] ?? 'User' }}">
     @php
         $allLabels = [];
-        $locales = ['en' => 'English', 'hi' => 'हिन्दी', 'ta' => 'தமிழ்', 'te' => 'తెలుగు', 'ml' => 'മലയാളം', 'mr' => 'मराठी'];
+        $locales = ['en' => 'English', 'hi' => 'हिन्दी', 'ta' => 'தமிழ்', 'te' => 'తెలుగు', 'ml' => 'മലയാളം', 'mr' => 'मराठी', 'kn' => 'ಕನ್ನಡ'];
         foreach (array_keys($locales) as $loc) {
             $r = __('horoscope.rashis', [], $loc);
             $g = __('horoscope.grahas', [], $loc);
@@ -33,7 +33,7 @@
         $svgSize = $cs * 4;
     @endphp
 
-    <div class="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8" x-data="{
+    <div class="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8" x-data="{
         style: 'south',
         locale: 'en',
         labels: {{ Js::from($allLabels) }},

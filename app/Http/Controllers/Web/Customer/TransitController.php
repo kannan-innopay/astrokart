@@ -18,7 +18,7 @@ class TransitController extends Controller
     public function index(Request $request): View
     {
         $user = $request->user();
-        $validLocales = ['en', 'hi', 'ta', 'te', 'ml', 'mr'];
+        $validLocales = ['en', 'hi', 'ta', 'te', 'ml', 'mr', 'kn'];
         $locale = in_array($request->query('lang'), $validLocales)
             ? $request->query('lang')
             : ($user?->preferred_language ?? 'en');
@@ -36,7 +36,7 @@ class TransitController extends Controller
                 // Add effect level and forecast key to each transit
                 foreach ($forecast['transits'] as &$transit) {
                     $transit['effect_level'] = $this->transitService->getEffectLevel($transit['house_from_moon']);
-                    $transit['forecast_key'] = strtolower($transit['planet']) . '_in_' . $transit['house_from_moon'];
+                    $transit['forecast_key'] = strtolower($transit['planet']).'_in_'.$transit['house_from_moon'];
                 }
 
                 $remedies = $this->pariharamService->getRemediesForUser($user, $forecast);

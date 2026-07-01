@@ -2,7 +2,7 @@
     <div class="mx-auto max-w-5xl px-3 py-5 sm:px-6 sm:py-8 lg:px-8">
 
         @php
-            $availableLocales = ['en' => 'English', 'hi' => 'हिन्दी', 'ta' => 'தமிழ்', 'te' => 'తెలుగు', 'ml' => 'മലയാളം', 'mr' => 'मराठी'];
+            $availableLocales = ['en' => 'English', 'hi' => 'हिन्दी', 'ta' => 'தமிழ்', 'te' => 'తెలుగు', 'ml' => 'മലയാളം', 'mr' => 'मराठी', 'kn' => 'ಕನ್ನಡ'];
 
             $allLabels = [];
             foreach (array_keys($availableLocales) as $loc) {

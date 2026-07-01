@@ -43,7 +43,7 @@
             </div>
 
             @php
-                $availableLocales = ['en' => 'English', 'hi' => 'हिन्दी', 'ta' => 'தமிழ்', 'te' => 'తెలుగు', 'ml' => 'മലയാളം', 'mr' => 'मराठी'];
+                $availableLocales = ['en' => 'English', 'hi' => 'हिन्दी', 'ta' => 'தமிழ்', 'te' => 'తెలుగు', 'ml' => 'മലയാളം', 'mr' => 'मराठी', 'kn' => 'ಕನ್ನಡ'];
             @endphp
             <div class="flex flex-wrap gap-1.5">
                 @foreach($availableLocales as $code => $label)

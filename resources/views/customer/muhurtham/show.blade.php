@@ -1,5 +1,5 @@
 <x-layouts.customer title="Muhurtham Results">
-    <div class="mx-auto max-w-3xl px-4 py-8 sm:px-6">
+    <div class="mx-auto max-w-5xl px-4 py-8 sm:px-6">
         <div class="flex items-center gap-3">
             <a href="{{ route('muhurtham.index') }}" class="text-sm font-medium text-cosmic-600 hover:text-cosmic-700">&larr; Back</a>
         </div>

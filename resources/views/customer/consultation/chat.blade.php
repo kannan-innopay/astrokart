@@ -25,7 +25,7 @@
         $hasChart = (bool) $currentUser->birth_chart;
     @endphp
 
-    <div class="mx-auto flex h-[calc(100vh-4rem)] max-w-4xl flex-col"
+    <div class="mx-auto flex h-[calc(100vh-4rem)] max-w-5xl flex-col"
          x-data="{
             consultationId: {{ $chatConfig['consultationId'] }},
             userId: {{ $chatConfig['userId'] }},

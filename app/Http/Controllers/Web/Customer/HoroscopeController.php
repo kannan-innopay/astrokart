@@ -25,7 +25,7 @@ class HoroscopeController extends Controller
         }
 
         $hasBirthCoordinates = $user->birth_latitude && $user->birth_longitude;
-        $validLocales = ['en', 'hi', 'ta', 'te', 'ml', 'mr'];
+        $validLocales = ['en', 'hi', 'ta', 'te', 'ml', 'mr', 'kn'];
         $locale = in_array($request->query('lang'), $validLocales)
             ? $request->query('lang')
             : ($user->preferred_language ?? 'en');
